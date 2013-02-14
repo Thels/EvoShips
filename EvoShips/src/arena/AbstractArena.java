@@ -48,10 +48,14 @@ public class AbstractArena extends Observable implements Runnable
 		
 		while(gameRunning)
 		{
+			/*
+			 * Safely remove and add everything at the start of each tick.
+			 */
 			arenaObjects.addAll(addList);
 			arenaObjects.removeAll(removeList);
 			addList.clear();
 			removeList.clear();
+			
 		}
 	}
 
