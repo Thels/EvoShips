@@ -35,9 +35,14 @@ public abstract class AbstractShip extends AbstractObject
 		ticksSinceLastShot = 0;
 	}
 	
+	/**
+	 * Creates a new ship based upon another ship, so that it has the same position, name and direction.
+	 * @param ship Ship to base new ship on.
+	 */
 	public AbstractShip(AbstractShip ship)
 	{
 		super(ship.getObjectPosition(),ship.getDirection());
+		this.shipName = ship.getShipName();
 	}
 
 	protected void resetActionBooleans()
