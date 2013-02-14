@@ -20,6 +20,9 @@ import arena.objects.AbstractObject;
  */
 public class AbstractArena extends Observable implements Runnable
 {
+	private final int MAX_GAME_TICKS = 30000;
+	
+	
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
 	 * AddList holds a list of objects to be added to the game at the start of the next tick.
@@ -41,8 +44,15 @@ public class AbstractArena extends Observable implements Runnable
 	@Override
 	public void run() 
 	{
-		// TODO Auto-generated method stub
+		boolean gameRunning = true;
 		
+		while(gameRunning)
+		{
+			arenaObjects.addAll(addList);
+			arenaObjects.removeAll(removeList);
+			addList.clear();
+			removeList.clear();
+		}
 	}
 
 }
