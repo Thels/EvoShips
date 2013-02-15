@@ -20,7 +20,11 @@ import arena.objects.AbstractObject;
  */
 public class AbstractArena extends Observable implements Runnable
 {
+	//Amount of game ticks that constitutes "too long".
 	private final int MAX_GAME_TICKS = 30000;
+	
+	//Amount of ticks that must happen in between every asteroid spawning.
+	private final int ASTEROID_SPAWN_DELAY = 20;
 	
 	
 	/*
@@ -34,6 +38,12 @@ public class AbstractArena extends Observable implements Runnable
 	private int maxAsteroids, tickDelay, arenaTickCount;
 	private double asteroidSpawnChanceNorm;
 	
+	/**
+	 * Create a new AbstractArena with the following parameters.
+	 * @param maxAsteroidCount Maximum asteroids that can spawn in the game.
+	 * @param asteroidSpawnChance Percentage chance of asteroid spawning in this arena every tick.
+	 * @param tickDelay
+	 */
 	public AbstractArena(int maxAsteroidCount, int asteroidSpawnChance, int tickDelay)
 	{
 		this.asteroidSpawnChanceNorm = (double)asteroidSpawnChance / 100;
