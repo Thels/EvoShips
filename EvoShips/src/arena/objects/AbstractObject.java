@@ -3,6 +3,8 @@ package arena.objects;
 import java.awt.Point;
 import java.util.Random;
 
+import arena.collisions.CollisionPolygon;
+
 /**
  * Abstract class representing the core behaviour and methods that belong to any given object
  * in the arena.
@@ -118,6 +120,8 @@ public abstract class AbstractObject
 		this.objectHealth -= amount;
 	}
 
+	
+	public abstract CollisionPolygon getObjectCollisionModel();
 
 
 

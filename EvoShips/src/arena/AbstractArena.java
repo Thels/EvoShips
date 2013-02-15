@@ -41,8 +41,8 @@ public class AbstractArena extends Observable implements Runnable
 	/**
 	 * Create a new AbstractArena with the following parameters.
 	 * @param maxAsteroidCount Maximum asteroids that can spawn in the game.
-	 * @param asteroidSpawnChance Percentage chance of asteroid spawning in this arena every tick.
-	 * @param tickDelay
+	 * @param asteroidSpawnChance Percentage chance of asteroid spawning in this arena every tick. ( 1- 100 )
+	 * @param tickDelay Amount of delay the thread should have in between every game-tick.
 	 */
 	public AbstractArena(int maxAsteroidCount, int asteroidSpawnChance, int tickDelay)
 	{

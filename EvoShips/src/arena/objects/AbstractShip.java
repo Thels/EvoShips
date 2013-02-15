@@ -73,10 +73,49 @@ public abstract class AbstractShip extends AbstractObject
 	{
 		if(fire)
 			fire();
-
-			
-
+		if(left)
+			turnLeft();
+		else if(right)
+			turnRight();
+		if(forward)
+			moveForward();
+		else if(backward)
+			moveBackward();
 	}
+	
+	/**
+	 * Turn the ship left by a set amount of degrees.
+	 */
+	private void turnLeft()
+	{
+		
+	}
+	
+	/**
+	 * Turn the ship right by a set amount of degrees.
+	 */
+	private void turnRight()
+	{
+		
+	}
+	
+	/**
+	 * Move the ship forward by a given distance on it's current facing.
+	 */
+	private void moveForward()
+	{
+		
+	}
+	
+	/**
+	 * Move the ship backward by a given distance on it's current facing.
+	 */
+	private void moveBackward()
+	{
+		
+	}
+	
+	
 	/**
 	 * Determine the action that this ship has to take this tick, setting boolean values such as fire, left, right, forward 
 	 * and backward to true and false figure this out.
