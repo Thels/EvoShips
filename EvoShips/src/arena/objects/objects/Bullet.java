@@ -1,5 +1,7 @@
 package arena.objects.objects;
 
+import java.awt.Point;
+
 import arena.collisions.CollisionPolygon;
 import arena.objects.AbstractObject;
 import arena.objects.EObjects;
@@ -7,10 +9,19 @@ import arena.objects.EObjects;
 public class Bullet extends AbstractObject 
 {
 
+	private AbstractObject bulletCreator;
+		
+	public Bullet(AbstractObject bulletCreator, Point.Double spawnLocation, double bulletDirection)
+	{
+		super(spawnLocation, bulletDirection);
+		this.bulletCreator = bulletCreator;
+		
+	}
+	
 	@Override
 	public EObjects getObjectType()
 	{
-		return null;
+		return EObjects.OBJ_BULLET;
 	}
 
 	@Override
@@ -24,5 +35,11 @@ public class Bullet extends AbstractObject
 	{
 		return null;
 	}
+	
+	public AbstractObject getBulletCreator()
+	{
+		return this.bulletCreator;
+	}
+	
 
 }

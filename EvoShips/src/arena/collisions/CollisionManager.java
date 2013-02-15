@@ -6,6 +6,7 @@ import java.util.List;
 import arena.AbstractArena;
 import arena.objects.AbstractObject;
 import arena.objects.EObjects;
+import arena.objects.objects.Bullet;
 
 /**
  * The collision watcher is a class which will be able to detect, and deal with collisions. It is created with a reference
@@ -47,7 +48,7 @@ public class CollisionManager
 	 * @param objectToCheck Object to check for safe movement.
 	 * @return Is the move safe.
 	 */
-	public boolean isPositionSafe(AbstractObject objectToCheck)
+	public boolean willPositionBeSafe(AbstractObject objectToCheck)
 	{
 		if(objectToCheck.getObjectPosition().x < 0+0.035 || objectToCheck.getObjectPosition().x > 1-0.035 || objectToCheck.getObjectPosition().y < 0+0.035 || objectToCheck.getObjectPosition().y > 1-0.035)
 			return false;
@@ -86,25 +87,24 @@ public class CollisionManager
 							CollisionPolygon other = gameObjects.get(j).getObjectCollisionModel();
 
 							if(bullet.collide(other))
-								collisionList.add(new Collision(gameObjects.get(i), gameObjects.get(j)));
+								collisionList.add(new Collision(gameObjects.get(i), gameObjects.get(j), ECollisionTypes.BULLET_COL));
 						}
 
 					}
 
-					if(gameObjects.get(i).getObjectType() == EObjects.ASTEROID && gameObjects.get(j).getObjectType() == EObjects.SHIP)
+					if(gameObjects.get(i).getObjectType() == EObjects.OBJ_ASTEROID && gameObjects.get(j).getObjectType() == EObjects.OBJ_SHIP)
 					{
 						CollisionPolygon asteroid = gameObjects.get(i).getObjectCollisionModel();
 						CollisionPolygon ship = gameObjects.get(j).getObjectCollisionModel();
 
 						if(asteroid.collide(ship))
-							collisionList.add(new Collision(gameObjects.get(i), gameObjects.get(j)));
+							collisionList.add(new Collision(gameObjects.get(i), gameObjects.get(j), ECollisionTypes.ASTEROID_COL));
 					}
 
 
 				}			
 			}		
 		}
-		//Now we deal with the collisions, then clear the list so that the next ticks collison list is empty.
 		dealWithCollisions();
 		collisionList.clear();
 	}
@@ -119,18 +119,22 @@ public class CollisionManager
 	{
 		for(Collision c : collisionList)
 		{
-			if(c.getObject().getObjectType() == EObjects.BULLET)
+			switch(c.getCollisionType())
 			{
-				c.getObject().applyDamage(1);
+			case BULLET_COL:
+			{
 				c.getCollidingWithObject().applyDamage(1);
-			}	
+				c.getObject().applyDamage(1);
+				break;
+			}
 
-			else if(c.getObject().getObjectType() == EObjects.ASTEROID)
+			case ASTEROID_COL:
 			{
 				c.getCollidingWithObject().applyDamage(10);
-			}	
+				break;
+			}
+
+			}
 		}
-
 	}
-
 }

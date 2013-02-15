@@ -10,7 +10,7 @@ public class Asteroid extends AbstractObject
 	@Override
 	public EObjects getObjectType() 
 	{
-		return null;
+		return EObjects.OBJ_ASTEROID;
 	}
 
 	@Override
