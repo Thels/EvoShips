@@ -119,6 +119,11 @@ public abstract class AbstractObject
 	{
 		this.objectHealth -= amount;
 	}
+	
+	public void setNewObjectPosition(Point.Double newPos)
+	{
+		this.objectPos = newPos;
+	}
 
 	
 	public abstract CollisionPolygon getObjectCollisionModel();
