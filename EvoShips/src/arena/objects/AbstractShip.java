@@ -50,6 +50,10 @@ public abstract class AbstractShip extends AbstractObject
 		forward = backward = left = right = fire = false;
 	}
 
+	/**
+	 * Get the name of this ship.
+	 * @return Name of the ship as given in the constructor.
+	 */
 	public String getShipName()
 	{
 		return this.shipName;
@@ -69,6 +73,8 @@ public abstract class AbstractShip extends AbstractObject
 	{
 		if(fire)
 			fire();
+
+			
 
 	}
 	/**
@@ -94,6 +100,9 @@ public abstract class AbstractShip extends AbstractObject
 		}
 	}
 	
+	/**
+	 * Method that is called whenever the ship is to fire.
+	 */
 	private void fire()
 	{
 
