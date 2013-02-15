@@ -38,8 +38,8 @@ public abstract class AbstractObject
 	{
 		Random r = new Random();
 
-		double x = r.nextDouble();
-		double y = r.nextDouble();
+		double x = 0.1 + ( 0.9 - 0.1 ) * r.nextDouble();
+		double y = 0.1 + ( 0.9 - 0.1 ) * r.nextDouble();
 
 		this.objectPos = new Point.Double(x,y);
 		this.objectDir = 360 * r.nextDouble();

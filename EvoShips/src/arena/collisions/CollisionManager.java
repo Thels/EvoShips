@@ -41,14 +41,14 @@ public class CollisionManager
 
 	/**
 	 * Checks to see whether or not a position is safe to move to. This is mainly for ships to use, and the value checking is determined by this.
-	 * The "magic numbers" 0.025 is the width of a given ship. So first of all it checks that any of the given points of the ship are going to be outside of
+	 * The "magic numbers" 0.035 is the width of a given ship. So first of all it checks that any of the given points of the ship are going to be outside of
 	 * the bounds. It then checks to see if it collides with any other given object.
 	 * 
 	 * This method is useful as it allows ships to check if they need to reverse after moving. To avoid colliding or "warping" inside another object.
 	 * @param objectToCheck Object to check for safe movement.
 	 * @return Is the move safe.
 	 */
-	public boolean willPositionBeSafe(AbstractObject objectToCheck)
+	public boolean isMoveValid(AbstractObject objectToCheck)
 	{
 		if(objectToCheck.getObjectPosition().x < 0+0.035 || objectToCheck.getObjectPosition().x > 1-0.035 || objectToCheck.getObjectPosition().y < 0+0.035 || objectToCheck.getObjectPosition().y > 1-0.035)
 			return false;
@@ -130,6 +130,7 @@ public class CollisionManager
 
 			case ASTEROID_COL:
 			{
+				c.getObject().applyDamage(1);
 				c.getCollidingWithObject().applyDamage(10);
 				break;
 			}
