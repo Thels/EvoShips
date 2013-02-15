@@ -120,6 +120,10 @@ public abstract class AbstractObject
 		this.objectHealth -= amount;
 	}
 	
+	/**
+	 * Sets the position of the object.
+	 * @param newPos New position.
+	 */
 	public void setNewObjectPosition(Point.Double newPos)
 	{
 		this.objectPos = newPos;
