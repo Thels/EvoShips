@@ -3,7 +3,7 @@ package arena.collisions;
 import java.util.ArrayList;
 import java.util.List;
 
-import arena.AbstractArena;
+import arena.Arena;
 import arena.objects.AbstractObject;
 import arena.objects.EObjects;
 import arena.objects.objects.Bullet;
@@ -18,13 +18,13 @@ public class CollisionManager
 {
 	private ArrayList<Collision> collisionList;
 	private List<AbstractObject> gameObjects;
-	private AbstractArena arena;
+	private Arena arena;
 
 	/**
 	 * Generate a new collision manager. With the given arena as a reference.
 	 * @param arena Arena this class is managing collisions for.
 	 */
-	public CollisionManager(AbstractArena arena)
+	public CollisionManager(Arena arena)
 	{
 		this.collisionList = new ArrayList<Collision>();
 		this.arena = arena;

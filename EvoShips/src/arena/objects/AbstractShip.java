@@ -2,7 +2,7 @@ package arena.objects;
 
 import java.awt.Point;
 
-import arena.AbstractArena;
+import arena.Arena;
 
 public abstract class AbstractShip extends AbstractObject
 {
@@ -23,7 +23,7 @@ public abstract class AbstractShip extends AbstractObject
 	private String shipName;
 	protected boolean forward, backward, left, right, fire;
 	private int ticksSinceLastShot;
-	private AbstractArena currentGame;
+	private Arena currentGame;
 
 	/**
 	 * Create a new ship, with a set given name.
@@ -146,7 +146,7 @@ public abstract class AbstractShip extends AbstractObject
 	 * @param arena Arena in which the ship is competing.
 	 * @return True if set correctly, false if otherwise.
 	 */
-	public boolean setCurrentGame(AbstractArena arena)
+	public boolean setCurrentGame(Arena arena)
 	{
 		if(this.currentGame != null)
 			return false;

@@ -20,7 +20,7 @@ import arena.objects.AbstractShip;
  * @author Ross
  *
  */
-public abstract class AbstractArena extends Observable implements Runnable
+public class Arena extends Observable implements Runnable
 {
 	//Amount of game ticks that constitutes "too long".
 	private final int MAX_GAME_TICKS = 30000;
@@ -47,7 +47,7 @@ public abstract class AbstractArena extends Observable implements Runnable
 	 * @param asteroidSpawnChance Percentage chance of asteroid spawning in this arena every tick. ( 1- 100 )
 	 * @param tickDelay Amount of delay the thread should have in between every game-tick.
 	 */
-	public AbstractArena(int maxAsteroidCount, int asteroidSpawnChance, int tickDelay)
+	public Arena(int maxAsteroidCount, int asteroidSpawnChance, int tickDelay)
 	{
 		this.asteroidSpawnChanceNorm = (double)asteroidSpawnChance / 100;
 		this.tickDelay = tickDelay;
@@ -79,7 +79,13 @@ public abstract class AbstractArena extends Observable implements Runnable
 	 * @param gameShips Current ships in the arena.
 	 * @return True if the game is still running, false otherwise.
 	 */
-	public abstract boolean updateGameStatus(ArrayList<AbstractShip> gameShips);
+	public boolean updateGameStatus(ArrayList<AbstractShip> gameShips)
+	{
+		for(AbstractShip ship : gameShips)
+			if(ship.isObjectAlive())
+				return true;
+		return false;
+	}
 	
 	
 	
