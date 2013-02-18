@@ -1,5 +1,7 @@
 package arena.objects;
 
+import java.awt.Point;
+
 import arena.AbstractArena;
 
 public abstract class AbstractShip extends AbstractObject
@@ -88,7 +90,9 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	private void turnLeft()
 	{
-		
+		modifyDirection(-SHIP_TURNSPEED);
+		if(!currentGame.getCollisionManager().isMoveValid(this))
+			modifyDirection(SHIP_TURNSPEED);
 	}
 	
 	/**
@@ -96,7 +100,9 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	private void turnRight()
 	{
-		
+		modifyDirection(SHIP_TURNSPEED);
+		if(!currentGame.getCollisionManager().isMoveValid(this))
+			modifyDirection(-SHIP_TURNSPEED);
 	}
 	
 	/**
@@ -109,13 +115,8 @@ public abstract class AbstractShip extends AbstractObject
 		double newPosX = getObjectPosition().x + (SHIP_SPEED * Math.sin(Math.toRadians(getDirection())));
 		double newPosY = getObjectPosition().y + (SHIP_SPEED * Math.cos(Math.toRadians(getDirection())));
 		this.setNewObjectPosition(new Point.Double(newPosX, newPosY));
-		if(!CollisionWatcher.isPositionSafe(this))
-		{
-			setNewPos(new Point.Double(oldPosX, oldPosY));
-			return false;
-		}
-		return true;
-
+		if(currentGame.getCollisionManager().isMoveValid(this))
+			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
 	}
 	
 	/**
@@ -123,7 +124,13 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	private void moveBackward()
 	{
-		
+		double oldPosX = getObjectPosition().x;
+		double oldPosY = getObjectPosition().y;
+		double newPosX = getObjectPosition().x - (SHIP_SPEED_REVERSE * Math.sin(Math.toRadians(getDirection())));
+		double newPosY = getObjectPosition().y - (SHIP_SPEED_REVERSE * Math.cos(Math.toRadians(getDirection())));
+		this.setNewObjectPosition(new Point.Double(newPosX, newPosY));
+		if(currentGame.getCollisionManager().isMoveValid(this))
+			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
 	}
 	
 	
