@@ -3,6 +3,7 @@ package arena;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import arena.collisions.CollisionManager;
 import arena.objects.AbstractObject;
 
 /**
@@ -37,6 +38,7 @@ public class AbstractArena extends Observable implements Runnable
 	private ArrayList<AbstractObject> arenaObjects, addList, removeList;
 	private int maxAsteroids, tickDelay, arenaTickCount;
 	private double asteroidSpawnChanceNorm;
+	private CollisionManager collisionManager;
 	
 	/**
 	 * Create a new AbstractArena with the following parameters.
@@ -48,7 +50,9 @@ public class AbstractArena extends Observable implements Runnable
 	{
 		this.asteroidSpawnChanceNorm = (double)asteroidSpawnChance / 100;
 		this.tickDelay = tickDelay;
-		arenaTickCount = 0;
+		this.arenaTickCount = 0;
+		this.collisionManager = new CollisionManager(this);
+		
 	}
 	
 	@Override
@@ -67,6 +71,15 @@ public class AbstractArena extends Observable implements Runnable
 			removeList.clear();
 			
 		}
+	}
+	
+	/**
+	 * Get the list of objects that currently exist in the arena.
+	 * @return List of all objects.
+	 */
+	public ArrayList<AbstractObject> getArenaObjects()
+	{
+		return this.arenaObjects;
 	}
 
 }

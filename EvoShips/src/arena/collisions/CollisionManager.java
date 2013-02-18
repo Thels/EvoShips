@@ -17,7 +17,8 @@ import arena.objects.objects.Bullet;
 public class CollisionManager
 {
 	private ArrayList<Collision> collisionList;
-	private List<AbstractObject> gameObjects = null;
+	private List<AbstractObject> gameObjects;
+	private AbstractArena arena;
 
 	/**
 	 * Generate a new collision manager. With the given arena as a reference.
@@ -25,7 +26,8 @@ public class CollisionManager
 	 */
 	public CollisionManager(AbstractArena arena)
 	{
-		collisionList = new ArrayList<Collision>();
+		this.collisionList = new ArrayList<Collision>();
+		this.arena = arena;
 	}
 
 	/**
@@ -70,6 +72,7 @@ public class CollisionManager
 	 */
 	public void checkForCollisions() 
 	{
+		this.gameObjects = arena.getArenaObjects();
 		for(int i = 0 ; i < gameObjects.size(); i++)
 		{
 			for(int j = 0; j < gameObjects.size(); j++)
@@ -139,4 +142,5 @@ public class CollisionManager
 			}
 		}
 	}
+	
 }
