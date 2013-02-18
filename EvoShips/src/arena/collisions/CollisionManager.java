@@ -50,7 +50,7 @@ public class CollisionManager
 	 */
 	public boolean isMoveValid(AbstractObject objectToCheck)
 	{
-		if(objectToCheck.getObjectPosition().x < 0+0.035 || objectToCheck.getObjectPosition().x > 1-0.035 || objectToCheck.getObjectPosition().y < 0+0.035 || objectToCheck.getObjectPosition().y > 1-0.035)
+		if(objectToCheck.getObjectPosition().x < 0.035 || objectToCheck.getObjectPosition().x > 1-0.035 || objectToCheck.getObjectPosition().y < 0.035 || objectToCheck.getObjectPosition().y > 1-0.035)
 			return false;
 
 		for(AbstractObject obj : gameObjects)
