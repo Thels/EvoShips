@@ -81,5 +81,14 @@ public class AbstractArena extends Observable implements Runnable
 	{
 		return this.arenaObjects;
 	}
+	
+	/**
+	 * Get the current collision manager of this arena.
+	 * @return Collision manager currently being used by this arena.
+	 */
+	public CollisionManager getCollisionManager()
+	{
+		return collisionManager;
+	}
 
 }

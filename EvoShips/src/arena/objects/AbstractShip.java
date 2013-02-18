@@ -104,7 +104,18 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	private void moveForward()
 	{
-		
+		double oldPosX = getObjectPosition().x;
+		double oldPosY = getObjectPosition().y;
+		double newPosX = getObjectPosition().x + (SHIP_SPEED * Math.sin(Math.toRadians(getDirection())));
+		double newPosY = getObjectPosition().y + (SHIP_SPEED * Math.cos(Math.toRadians(getDirection())));
+		this.setNewObjectPosition(new Point.Double(newPosX, newPosY));
+		if(!CollisionWatcher.isPositionSafe(this))
+		{
+			setNewPos(new Point.Double(oldPosX, oldPosY));
+			return false;
+		}
+		return true;
+
 	}
 	
 	/**
