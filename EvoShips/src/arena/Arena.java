@@ -1,9 +1,11 @@
 package arena;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 import arena.collisions.CollisionManager;
+import arena.exceptions.GameAlreadySetException;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 
@@ -27,6 +29,8 @@ public class Arena extends Observable implements Runnable
 	
 	//Amount of ticks that must happen in between every asteroid spawning.
 	private final int ASTEROID_SPAWN_DELAY = 20;
+	
+	private HashMap<AbstractShip, Integer> scoreMap;
 	
 	
 	/*
@@ -53,6 +57,7 @@ public class Arena extends Observable implements Runnable
 		this.tickDelay = tickDelay;
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);
+		this.scoreMap = new HashMap<AbstractShip, Integer>();
 		
 	}
 	
@@ -117,5 +122,20 @@ public class Arena extends Observable implements Runnable
 	{
 		return collisionManager;
 	}
-
+	
+	/**
+	 * This method will add a given ship to the arena, it will do this by copying it into a new ship, and adding it into the score map.
+	 * @param shipToAdd Ship to add to the arena.
+	 * @throws GameAlreadySetException Thrown if for some reason the ship already has a game set.
+	 */
+	public void addShipToArena(AbstractShip shipToAdd)
+	{
+		if(shipToAdd.setCurrentGame(this))
+		{
+			arenaObjects.add(shipToAdd);
+			scoreMap.put(shipToAdd, 0);
+		}
+	}
+	
+	
 }
