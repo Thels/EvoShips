@@ -5,6 +5,7 @@ import java.util.Observable;
 
 import arena.collisions.CollisionManager;
 import arena.objects.AbstractObject;
+import arena.objects.AbstractShip;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -19,7 +20,7 @@ import arena.objects.AbstractObject;
  * @author Ross
  *
  */
-public class AbstractArena extends Observable implements Runnable
+public abstract class AbstractArena extends Observable implements Runnable
 {
 	//Amount of game ticks that constitutes "too long".
 	private final int MAX_GAME_TICKS = 30000;
@@ -72,6 +73,15 @@ public class AbstractArena extends Observable implements Runnable
 			
 		}
 	}
+	
+	/**
+	 * Update the current status of the game given the list of the ships competing.
+	 * @param gameShips Current ships in the arena.
+	 * @return True if the game is still running, false otherwise.
+	 */
+	public abstract boolean updateGameStatus(ArrayList<AbstractShip> gameShips);
+	
+	
 	
 	/**
 	 * Get the list of objects that currently exist in the arena.
