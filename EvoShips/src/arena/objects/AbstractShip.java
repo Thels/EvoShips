@@ -38,16 +38,12 @@ public abstract class AbstractShip extends AbstractObject
 		resetActionBooleans();
 		ticksSinceLastShot = 0;
 	}
-
+	
 	/**
-	 * Creates a new ship based upon another ship, so that it has the same position, name and direction.
-	 * @param ship Ship to base new ship on.
+	 * Returns a deep copy of this abstract ship, useful for running one ship across many threads while maintaining scoring.
+	 * @return AbstractShip copy of the current ship.
 	 */
-	public AbstractShip(AbstractShip ship)
-	{
-		this(ship.getShipName());
-		this.cloneOfShip = ship;
-	}
+	public abstract AbstractShip deepCopy();
 
 	protected void resetActionBooleans()
 	{

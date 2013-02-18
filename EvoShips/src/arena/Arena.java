@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import arena.collisions.CollisionManager;
-import arena.exceptions.GameAlreadySetException;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 
@@ -130,10 +129,11 @@ public class Arena extends Observable implements Runnable
 	 */
 	public void addShipToArena(AbstractShip shipToAdd)
 	{
-		if(shipToAdd.setCurrentGame(this))
+		AbstractShip copy = shipToAdd.deepCopy();
+		if(copy.setCurrentGame(this))
 		{
-			arenaObjects.add(shipToAdd);
-			scoreMap.put(shipToAdd, 0);
+			arenaObjects.add(copy);
+			scoreMap.put(copy, 0);
 		}
 	}
 	
