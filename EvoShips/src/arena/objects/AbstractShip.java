@@ -24,6 +24,7 @@ public abstract class AbstractShip extends AbstractObject
 	protected boolean forward, backward, left, right, fire;
 	private int ticksSinceLastShot;
 	private Arena currentGame;
+	private AbstractShip cloneOfShip;
 
 	/**
 	 * Create a new ship, with a set given name.
@@ -33,7 +34,7 @@ public abstract class AbstractShip extends AbstractObject
 	{
 		super();
 		this.shipName = shipName;
-		forward = backward = left = right = fire = false;
+		resetActionBooleans();
 		ticksSinceLastShot = 0;
 	}
 
@@ -43,8 +44,8 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	public AbstractShip(AbstractShip ship)
 	{
-		super(ship.getObjectPosition(),ship.getDirection());
-		this.shipName = ship.getShipName();
+		this(ship.getShipName());
+		this.cloneOfShip = ship;
 	}
 
 	protected void resetActionBooleans()
@@ -163,6 +164,18 @@ public abstract class AbstractShip extends AbstractObject
 	private void fire()
 	{
 		//TODO Add in fire method. Need arena watcher to be up and running for that though.
+	}
+	
+	/**
+	 * Gets the ship that this ship was copied from. This is used for when scoring has to be calculated when I changed to threading the arenas.
+	 * @return
+	 */
+	public AbstractShip getCloneOfShip()
+	{
+		if(this.cloneOfShip != null)
+			return this.cloneOfShip;
+		else
+			return null;
 	}
 
 }

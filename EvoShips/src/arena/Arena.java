@@ -71,6 +71,17 @@ public class Arena extends Observable implements Runnable
 			addList.clear();
 			removeList.clear();
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 	}
 	
