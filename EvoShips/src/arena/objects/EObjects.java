@@ -15,11 +15,19 @@ public enum EObjects
 	
 	private int defaultObjectHealth;
 	
+	/**
+	 * Create a new EObject in the enum with the given objecthealth.
+	 * @param objectHealth Base health of the object.
+	 */
 	EObjects(int objectHealth)
 	{
 		this.defaultObjectHealth = objectHealth;
 	}
 	
+	/**
+	 * Get the base health of the given object.
+	 * @return Health as given in the enum.
+	 */
 	public int getBaseHealth()
 	{
 		return defaultObjectHealth;
