@@ -36,7 +36,7 @@ public abstract class AbstractShip extends AbstractObject
 		forward = backward = left = right = fire = false;
 		ticksSinceLastShot = 0;
 	}
-	
+
 	/**
 	 * Creates a new ship based upon another ship, so that it has the same position, name and direction.
 	 * @param ship Ship to base new ship on.
@@ -84,7 +84,7 @@ public abstract class AbstractShip extends AbstractObject
 		else if(backward)
 			moveBackward();
 	}
-	
+
 	/**
 	 * Turn the ship left by a set amount of degrees.
 	 */
@@ -94,7 +94,7 @@ public abstract class AbstractShip extends AbstractObject
 		if(!currentGame.getCollisionManager().isMoveValid(this))
 			modifyDirection(SHIP_TURNSPEED);
 	}
-	
+
 	/**
 	 * Turn the ship right by a set amount of degrees.
 	 */
@@ -104,7 +104,7 @@ public abstract class AbstractShip extends AbstractObject
 		if(!currentGame.getCollisionManager().isMoveValid(this))
 			modifyDirection(-SHIP_TURNSPEED);
 	}
-	
+
 	/**
 	 * Move the ship forward by a given distance on it's current facing.
 	 */
@@ -118,7 +118,7 @@ public abstract class AbstractShip extends AbstractObject
 		if(currentGame.getCollisionManager().isMoveValid(this))
 			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
 	}
-	
+
 	/**
 	 * Move the ship backward by a given distance on it's current facing.
 	 */
@@ -132,15 +132,15 @@ public abstract class AbstractShip extends AbstractObject
 		if(currentGame.getCollisionManager().isMoveValid(this))
 			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
 	}
-	
-	
+
+
 	/**
 	 * Determine the action that this ship has to take this tick, setting boolean values such as fire, left, right, forward 
 	 * and backward to true and false figure this out.
 	 */
 	public abstract void determineAction();
-	
-	
+
+
 	/**
 	 * Attempts to set the current game this ships is competing in.
 	 * @param arena Arena in which the ship is competing.
@@ -156,13 +156,13 @@ public abstract class AbstractShip extends AbstractObject
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Method that is called whenever the ship is to fire.
 	 */
 	private void fire()
 	{
-
+		//TODO Add in fire method. Need arena watcher to be up and running for that though.
 	}
 
 }
