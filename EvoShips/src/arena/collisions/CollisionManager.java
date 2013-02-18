@@ -121,6 +121,7 @@ public class CollisionManager
 		{
 			switch(c.getCollisionType())
 			{
+			
 			case BULLET_COL:
 			{
 				c.getCollidingWithObject().applyDamage(1);

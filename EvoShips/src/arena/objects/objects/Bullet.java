@@ -33,7 +33,15 @@ public class Bullet extends AbstractObject
 	@Override
 	public CollisionPolygon getObjectCollisionModel() 
 	{
-		return null;
+		double x = getObjectPosition().x;
+		double y = getObjectPosition().y;
+		CollisionPolygon bulletPoly = new CollisionPolygon(new Point.Double(x,y), 4);
+		bulletPoly.addVertice(x-0.003125, y-0.003125);
+		bulletPoly.addVertice(x-0.003125, y+0.003125);
+		bulletPoly.addVertice(x+0.003125, y-0.003125);
+		bulletPoly.addVertice(x+0.003125, y+0.003125);
+		return bulletPoly;
+
 	}
 	
 	public AbstractObject getBulletCreator()
