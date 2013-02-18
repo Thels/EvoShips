@@ -1,6 +1,5 @@
 package arena.objects.ships;
 
-import arena.collisions.CollisionPolygon;
 import arena.objects.AbstractShip;
 
 public class TestShip extends AbstractShip 
@@ -10,11 +9,9 @@ public class TestShip extends AbstractShip
 		super(ship);
 	}
 
-	
-
-	public TestShip(String shipName) {
+	public TestShip(String shipName) 
+	{
 		super(shipName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,11 +20,4 @@ public class TestShip extends AbstractShip
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public CollisionPolygon getObjectCollisionModel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

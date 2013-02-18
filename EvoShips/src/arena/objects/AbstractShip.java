@@ -3,6 +3,7 @@ package arena.objects;
 import java.awt.Point;
 
 import arena.Arena;
+import arena.collisions.CollisionPolygon;
 
 public abstract class AbstractShip extends AbstractObject
 {
@@ -176,6 +177,29 @@ public abstract class AbstractShip extends AbstractObject
 			return this.cloneOfShip;
 		else
 			return null;
+	}
+	
+	@Override
+	public CollisionPolygon getObjectCollisionModel() 
+	{
+		CollisionPolygon colPol = new CollisionPolygon(this.getObjectPosition(), 3);
+		double x = getObjectPosition().x;
+		double y = getObjectPosition().y;
+
+		double frontX = x +  0.025 * Math.sin(Math.toRadians(getDirection()));
+		double frontY = y +  0.025 * Math.cos(Math.toRadians(getDirection()));
+		colPol.addVertice(frontX, frontY);
+
+		double backLeftX = x + (Math.sqrt(Math.pow(0.025, 2)*2)* Math.sin(Math.toRadians(getDirection()+180.0+45)));
+		double backLeftY = y + (Math.sqrt(Math.pow(0.025, 2)*2)* Math.cos(Math.toRadians(getDirection()+180.0+45)));
+		colPol.addVertice(backLeftX, backLeftY);
+
+		double backRightX = x + (Math.sqrt(Math.pow(0.025, 2)*2)* Math.sin(Math.toRadians(getDirection()+180.0-45)));
+		double backRightY = y + (Math.sqrt(Math.pow(0.025, 2)*2)* Math.cos(Math.toRadians(getDirection()+180.0-45)));
+		colPol.addVertice(backRightX, backRightY);
+
+		return colPol;
+
 	}
 
 }
