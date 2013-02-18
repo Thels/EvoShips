@@ -15,6 +15,11 @@ public class Asteroid extends AbstractObject
 	private double theta;
 	private int asteroidComplexity, tickCount;
 	
+	/**
+	 * Creates a new asteroid with the following parameters.
+	 * @param spawnLocation Location the asteroid is spawning.
+	 * @param direction Direction the asteroid is facing.
+	 */
 	public Asteroid(Point.Double spawnLocation, double direction)
 	{
 		super(spawnLocation,direction);
@@ -34,6 +39,9 @@ public class Asteroid extends AbstractObject
 	}
 
 	@Override
+	/**
+	 * When an asteroid ticks, it just follows its path until it has lived for a "Max Tick". At which point the asteroid kills itself.
+	 */
 	public void tickObject() 
 	{
 		this.tickCount++;
@@ -62,6 +70,10 @@ public class Asteroid extends AbstractObject
 		return colPol;
 	}
 	
+	/**
+	 * Gets the complexity of this asteroid, this is mainly used for the drawing code to be able to draw the correct shape of each asteroid later on.
+	 * @return The complexity of the asteroid.
+	 */
 	public int getAsteroidComplexity()
 	{
 		return this.asteroidComplexity;
