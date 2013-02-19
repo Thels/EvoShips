@@ -8,16 +8,21 @@ public class TestClass
 
 	public TestClass() 
 	{
+		int GAME_COUNT = 2500;
 		TestShip test1 = new TestShip("TestShip #1");
 		TestShip test2 = new TestShip("TestShip #2");
-		Arena[] arenaArray = new Arena[2500];
-		for(int i = 0 ;  i < 2500 ; i++)
+		TestShip test3 = new TestShip("TestShip #3");
+		TestShip test4 = new TestShip("TestShip #4");
+		Arena[] arenaArray = new Arena[GAME_COUNT];
+		for(int i = 0 ;  i < GAME_COUNT ; i++)
 		{
 			arenaArray[i] = new Arena(10, 10, 0);
 			try 
 			{
 				arenaArray[i].addShipToArena(test1);
 				arenaArray[i].addShipToArena(test2);
+				arenaArray[i].addShipToArena(test3);
+				arenaArray[i].addShipToArena(test4);
 			} 
 			catch (GameAlreadyRunningException e) 
 			{
@@ -25,14 +30,16 @@ public class TestClass
 			}
 			
 		}
-		for(int i = 0 ;  i < 2500 ; i++)
+		for(int i = 0 ;  i < GAME_COUNT ; i++)
 		{
 			arenaArray[i].run();
 		}
 		
 		
-		System.out.println(test1.getScore());
-		System.out.println(test2.getScore());
+		System.out.println(test1.getScore()/GAME_COUNT);
+		System.out.println(test2.getScore()/GAME_COUNT);
+		System.out.println(test3.getScore()/GAME_COUNT);
+		System.out.println(test4.getScore()/GAME_COUNT);
 		
 	}
 	

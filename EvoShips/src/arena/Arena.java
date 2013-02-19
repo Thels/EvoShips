@@ -27,7 +27,7 @@ import arena.objects.EObjects;
 public class Arena extends Observable implements Runnable
 {
 	//Amount of game ticks that constitutes "too long".
-	private final int MAX_GAME_TICKS = 30000;
+	private final int MAX_GAME_TICKS = 10000;
 
 	//Amount of ticks that must happen in between every asteroid spawning.
 	private final int ASTEROID_SPAWN_DELAY = 20;
@@ -129,7 +129,7 @@ public class Arena extends Observable implements Runnable
 			if(arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
 			{
 				for(AbstractShip ship : currentShips)
-					ship.incrementScore(5);
+					ship.incrementScore(1);
 			}
 
 			gameRunning = updateGameStatus(currentShips);
