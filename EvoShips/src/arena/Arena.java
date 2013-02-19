@@ -49,6 +49,7 @@ public class Arena extends Observable implements Runnable
 	private int maxAsteroids, tickDelay, arenaTickCount;
 	private double asteroidSpawnChanceNorm;
 	private CollisionManager collisionManager;
+	private ArenaWatcher arenaWatcher;
 
 	private boolean gameRunning;
 
@@ -64,9 +65,9 @@ public class Arena extends Observable implements Runnable
 		this.tickDelay = tickDelay;
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);
+		this.arenaWatcher = new ArenaWatcher();
 		this.scoreMap = new HashMap<AbstractShip, Integer>();
 		this.arenaObjects = new ArrayList<AbstractObject>();
-
 	}
 
 	@Override
@@ -93,6 +94,9 @@ public class Arena extends Observable implements Runnable
 
 			//Here are variable clears.
 			currentAsteroidCount = 0;
+			
+			//Ensure arena watcher is using most updated object list.
+			arenaWatcher.setObjects(arenaObjects);
 
 
 			//In order for each tick to be fair, the list of object is shuffled here.
@@ -181,6 +185,11 @@ public class Arena extends Observable implements Runnable
 	public CollisionManager getCollisionManager()
 	{
 		return collisionManager;
+	}
+	
+	public ArenaWatcher getArenaWatcher()
+	{
+		return arenaWatcher;
 	}
 
 	/**

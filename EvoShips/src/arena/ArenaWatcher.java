@@ -12,13 +12,15 @@ import arena.objects.objects.Bullet;
 
 public class ArenaWatcher 
 {
-	private List<AbstractObject> ships = new ArrayList<AbstractObject>();
-	private List<AbstractObject> asteroids = new ArrayList<AbstractObject>();
-	private List<AbstractObject> bullets = new ArrayList<AbstractObject>();
+	private List<AbstractObject> ships;
+	private List<AbstractObject> asteroids;
+	private List<AbstractObject> bullets;
 
-	public ArenaWatcher(List<AbstractObject> gameObjects)
+	public ArenaWatcher()
 	{
-		setObjects(gameObjects);
+		ships = new ArrayList<AbstractObject>();
+		asteroids = new ArrayList<AbstractObject>();
+		bullets = new ArrayList<AbstractObject>();
 	}
 
 
