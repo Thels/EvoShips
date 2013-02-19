@@ -1,12 +1,14 @@
 package arena;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Observable;
 
 import arena.collisions.CollisionManager;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
+import arena.objects.EObjects;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -25,13 +27,16 @@ public class Arena extends Observable implements Runnable
 {
 	//Amount of game ticks that constitutes "too long".
 	private final int MAX_GAME_TICKS = 30000;
-	
+
 	//Amount of ticks that must happen in between every asteroid spawning.
 	private final int ASTEROID_SPAWN_DELAY = 20;
-	
+
+	//This variable represents how many ticks have to occur before ships are given their 5 points for surviving.
+	private final int TICKS_PER_ALIVE_SCORE = 20;
+
 	private HashMap<AbstractShip, Integer> scoreMap;
-	
-	
+
+
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
 	 * AddList holds a list of objects to be added to the game at the start of the next tick.
@@ -43,7 +48,7 @@ public class Arena extends Observable implements Runnable
 	private int maxAsteroids, tickDelay, arenaTickCount;
 	private double asteroidSpawnChanceNorm;
 	private CollisionManager collisionManager;
-	
+
 	/**
 	 * Create a new AbstractArena with the following parameters.
 	 * @param maxAsteroidCount Maximum asteroids that can spawn in the game.
@@ -57,14 +62,16 @@ public class Arena extends Observable implements Runnable
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);
 		this.scoreMap = new HashMap<AbstractShip, Integer>();
-		
+
 	}
-	
+
 	@Override
 	public void run() 
 	{
 		boolean gameRunning = true;
-		
+		int currentAsteroidCount;
+		ArrayList<AbstractShip> currentShips = new ArrayList<AbstractShip>();
+
 		while(gameRunning)
 		{
 			/*
@@ -74,21 +81,55 @@ public class Arena extends Observable implements Runnable
 			arenaObjects.removeAll(removeList);
 			addList.clear();
 			removeList.clear();
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			currentShips.clear();
+
+			//Here are variable clears.
+			currentAsteroidCount = 0;
+
+
+			//In order for each tick to be fair, the list of object is shuffled here.
+			Collections.shuffle(arenaObjects);
+
+			//Go through each object, find all of the ships, useful to have a list of them.
+			//If it's a ship, then find out what it wants to do for the next tick.
+			//If it's dead, flag it for removal.
+			for (AbstractObject obj : arenaObjects) 
+			{
+				if(obj.getObjectType() == EObjects.OBJ_SHIP)
+					currentShips.add((AbstractShip) obj);
+
+				if(obj.isObjectAlive())
+				{
+					if(obj.getObjectType() == EObjects.OBJ_SHIP)
+					{
+						((AbstractShip) obj).determineAction();
+					}
+					if(obj.getObjectType() == EObjects.OBJ_ASTEROID)
+						currentAsteroidCount++;
+
+
+
+					obj.tickObject();
+				}
+				else
+					removeList.add(obj);
+			}
+
+			//TODO Spawn asteroids. Needs AsteroidFactory from prototype.
+
+			this.arenaTickCount++;
+			if(arenaTickCount >= TICKS_PER_ALIVE_SCORE)
+			{
+				arenaTickCount = 0;
+			}
+
+			gameRunning = updateGameStatus(currentShips);
+
+
+
 		}
 	}
-	
+
 	/**
 	 * Update the current status of the game given the list of the ships competing.
 	 * @param gameShips Current ships in the arena.
@@ -101,9 +142,9 @@ public class Arena extends Observable implements Runnable
 				return true;
 		return false;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Get the list of objects that currently exist in the arena.
 	 * @return List of all objects.
@@ -112,7 +153,7 @@ public class Arena extends Observable implements Runnable
 	{
 		return this.arenaObjects;
 	}
-	
+
 	/**
 	 * Get the current collision manager of this arena.
 	 * @return Collision manager currently being used by this arena.
@@ -121,7 +162,7 @@ public class Arena extends Observable implements Runnable
 	{
 		return collisionManager;
 	}
-	
+
 	/**
 	 * This method will add a given ship to the arena, it will do this by copying it into a new ship, and adding it into the score map.
 	 * @param shipToAdd Ship to add to the arena.
@@ -136,6 +177,6 @@ public class Arena extends Observable implements Runnable
 			scoreMap.put(copy, 0);
 		}
 	}
-	
-	
+
+
 }
