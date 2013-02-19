@@ -1,4 +1,4 @@
-package model.core;
+package arena;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import arena.objects.objects.Bullet;
 
 public class ArenaWatcher 
 {
-
 	private List<AbstractObject> ships = new ArrayList<AbstractObject>();
 	private List<AbstractObject> asteroids = new ArrayList<AbstractObject>();
 	private List<AbstractObject> bullets = new ArrayList<AbstractObject>();
@@ -21,8 +20,8 @@ public class ArenaWatcher
 	{
 		setObjects(gameObjects);
 	}
-	
-	
+
+
 	public void setObjects(List<AbstractObject> gameObjects) 
 	{
 		ships.clear();
