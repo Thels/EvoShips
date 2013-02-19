@@ -17,9 +17,11 @@ public class TestShip extends AbstractShip
 	}
 
 	@Override
-	public TestShip deepCopy() 
+	public TestShip cloneShip() 
 	{
-		return new TestShip(this.getShipName());
+		TestShip returnShip = new TestShip(this.getShipName());
+		returnShip.setCloneOfShip(this);
+		return returnShip;
 	}
 
 

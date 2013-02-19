@@ -72,9 +72,10 @@ public class Arena extends Observable implements Runnable
 	@Override
 	public void run() 
 	{
+		System.out.println(this.toString()+"   has started.");
 		gameRunning = true;
 		int currentAsteroidCount;
-		
+
 		ArrayList<AbstractShip> currentShips = new ArrayList<AbstractShip>();
 		addList = new ArrayList<AbstractObject>();
 		removeList = new ArrayList<AbstractObject>();
@@ -125,13 +126,14 @@ public class Arena extends Observable implements Runnable
 			//TODO Spawn asteroids. Needs AsteroidFactory from prototype.
 
 			this.arenaTickCount++;
-			if(arenaTickCount >= TICKS_PER_ALIVE_SCORE)
+			if(arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
 			{
-				arenaTickCount = 0;
+				for(AbstractShip ship : currentShips)
+					ship.incrementScore(5);
 			}
 
 			gameRunning = updateGameStatus(currentShips);
-			
+
 			try 
 			{
 				Thread.sleep(tickDelay);
@@ -140,8 +142,9 @@ public class Arena extends Observable implements Runnable
 			{
 				e.printStackTrace();
 			}
-	
 		}
+		
+		System.out.println(this.toString()+"   has ended.");
 	}
 
 	/**
@@ -151,6 +154,9 @@ public class Arena extends Observable implements Runnable
 	 */
 	public boolean updateGameStatus(ArrayList<AbstractShip> gameShips)
 	{
+		if(this.arenaTickCount == MAX_GAME_TICKS)
+			return false;
+		
 		for(AbstractShip ship : gameShips)
 			if(ship.isObjectAlive())
 				return true;
@@ -186,15 +192,15 @@ public class Arena extends Observable implements Runnable
 	{
 		if(gameRunning)
 			throw new GameAlreadyRunningException("addShipToArena");
-		
-		AbstractShip copy = shipToAdd.deepCopy();
+
+		AbstractShip copy = shipToAdd.cloneShip();
 		if(copy.setCurrentGame(this))
 		{
 			arenaObjects.add(copy);
 			scoreMap.put(copy, 0);
 		}
 	}
-	
+
 	/**
 	 * Adds a new object to the arena. If the game is already running, then it will que it to be added. Otherwise it will add it.
 	 * @param object Object to be added.

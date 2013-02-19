@@ -43,7 +43,7 @@ public abstract class AbstractShip extends AbstractObject
 	 * Returns a deep copy of this abstract ship, useful for running one ship across many threads while maintaining scoring.
 	 * @return AbstractShip copy of the current ship.
 	 */
-	public abstract AbstractShip deepCopy();
+	public abstract AbstractShip cloneShip();
 
 	protected void resetActionBooleans()
 	{
@@ -204,7 +204,10 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	public int getScore()
 	{
-		return this.getScore();
+		if(this.cloneOfShip == null)
+			return this.shipScore;
+		else
+			return this.cloneOfShip.getScore();
 	}
 
 	/**
@@ -219,6 +222,15 @@ public abstract class AbstractShip extends AbstractObject
 			this.shipScore += amount;
 		else
 			this.cloneOfShip.incrementScore(amount);
+	}
+	
+	/**
+	 * Set the ships cloneOf ship.
+	 * @param motherShip Ship to set as clone of ship.
+	 */
+	public void setCloneOfShip(AbstractShip motherShip)
+	{
+		this.cloneOfShip = motherShip;
 	}
 
 }
