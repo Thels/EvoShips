@@ -23,7 +23,7 @@ public abstract class AbstractShip extends AbstractObject
 
 	private String shipName;
 	protected boolean forward, backward, left, right, fire;
-	private int ticksSinceLastShot;
+	private int ticksSinceLastShot, shipScore;
 	private Arena currentGame;
 	private AbstractShip cloneOfShip;
 
@@ -36,9 +36,9 @@ public abstract class AbstractShip extends AbstractObject
 		super();
 		this.shipName = shipName;
 		resetActionBooleans();
-		ticksSinceLastShot = 0;
+		ticksSinceLastShot = shipScore = 0;
 	}
-	
+
 	/**
 	 * Returns a deep copy of this abstract ship, useful for running one ship across many threads while maintaining scoring.
 	 * @return AbstractShip copy of the current ship.
@@ -162,7 +162,7 @@ public abstract class AbstractShip extends AbstractObject
 	{
 		//TODO Add in fire method. Need arena watcher to be up and running for that though.
 	}
-	
+
 	/**
 	 * Gets the ship that this ship was copied from. This is used for when scoring has to be calculated when I changed to threading the arenas.
 	 * @return
@@ -174,7 +174,7 @@ public abstract class AbstractShip extends AbstractObject
 		else
 			return null;
 	}
-	
+
 	@Override
 	public CollisionPolygon getObjectCollisionModel() 
 	{
@@ -196,6 +196,29 @@ public abstract class AbstractShip extends AbstractObject
 
 		return colPol;
 
+	}
+
+	/**
+	 * Get the current score of the ship
+	 * @return Score of ship in arena.
+	 */
+	public int getScore()
+	{
+		return this.getScore();
+	}
+
+	/**
+	 * Increment the score of this ship in the given arena. It is synchronised since incrementing the score will happen across multiple threads.
+	 * 
+	 * If the ship has a "cloneOfShip". Then it will increment that ships score instead. This is to track scores across multiple games easily.
+	 * @param amount Amount to increase score by.
+	 */
+	public synchronized void incrementScore(int amount)
+	{
+		if(this.cloneOfShip == null)
+			this.shipScore += amount;
+		else
+			this.cloneOfShip.incrementScore(amount);
 	}
 
 }
