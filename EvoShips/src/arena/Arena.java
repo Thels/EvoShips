@@ -124,9 +124,15 @@ public class Arena extends Observable implements Runnable
 			}
 
 			gameRunning = updateGameStatus(currentShips);
-
-
-
+			
+			try 
+			{
+				Thread.sleep(tickDelay);
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 
