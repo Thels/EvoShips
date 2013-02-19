@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import arena.collisions.CollisionManager;
+import arena.exceptions.GameAlreadyRunningException;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 import arena.objects.EObjects;
@@ -49,6 +50,8 @@ public class Arena extends Observable implements Runnable
 	private double asteroidSpawnChanceNorm;
 	private CollisionManager collisionManager;
 
+	private boolean gameRunning;
+
 	/**
 	 * Create a new AbstractArena with the following parameters.
 	 * @param maxAsteroidCount Maximum asteroids that can spawn in the game.
@@ -62,15 +65,19 @@ public class Arena extends Observable implements Runnable
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);
 		this.scoreMap = new HashMap<AbstractShip, Integer>();
+		this.arenaObjects = new ArrayList<AbstractObject>();
 
 	}
 
 	@Override
 	public void run() 
 	{
-		boolean gameRunning = true;
+		gameRunning = true;
 		int currentAsteroidCount;
+		
 		ArrayList<AbstractShip> currentShips = new ArrayList<AbstractShip>();
+		addList = new ArrayList<AbstractObject>();
+		removeList = new ArrayList<AbstractObject>();
 
 		while(gameRunning)
 		{
@@ -133,6 +140,7 @@ public class Arena extends Observable implements Runnable
 			{
 				e.printStackTrace();
 			}
+	
 		}
 	}
 
@@ -174,14 +182,29 @@ public class Arena extends Observable implements Runnable
 	 * @param shipToAdd Ship to add to the arena.
 	 * @throws GameAlreadySetException Thrown if for some reason the ship already has a game set.
 	 */
-	public void addShipToArena(AbstractShip shipToAdd)
+	public void addShipToArena(AbstractShip shipToAdd) throws GameAlreadyRunningException
 	{
+		if(gameRunning)
+			throw new GameAlreadyRunningException("addShipToArena");
+		
 		AbstractShip copy = shipToAdd.deepCopy();
 		if(copy.setCurrentGame(this))
 		{
 			arenaObjects.add(copy);
 			scoreMap.put(copy, 0);
 		}
+	}
+	
+	/**
+	 * Adds a new object to the arena. If the game is already running, then it will que it to be added. Otherwise it will add it.
+	 * @param object Object to be added.
+	 */
+	public void addObjectToArena(AbstractObject object)
+	{
+		if(gameRunning)
+			addList.add(object);
+		else
+			arenaObjects.add(object);
 	}
 
 
