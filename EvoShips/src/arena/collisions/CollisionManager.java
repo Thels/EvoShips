@@ -129,7 +129,7 @@ public class CollisionManager
 			case BULLET_COL:
 			{
 				if(c.getCollidingWithObject().getObjectType() == EObjects.OBJ_SHIP)
-					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(3);
+					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(5);
 
 				else if(c.getCollidingWithObject().getObjectType() == EObjects.OBJ_ASTEROID)
 					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(1);

@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import arena.Arena;
 import arena.collisions.CollisionPolygon;
+import arena.objects.objects.Bullet;
 
 public abstract class AbstractShip extends AbstractObject
 {
@@ -160,7 +161,18 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	private void fire()
 	{
-		//TODO Add in fire method. Need arena watcher to be up and running for that though.
+		int currentBulletCount = currentGame.getArenaWatcher().getShipBulletCount(this);
+		if(currentBulletCount < MAX_BULLETS && ticksSinceLastShot >= FIRE_DELAY)
+		{
+			ticksSinceLastShot = 0;
+			
+			double frontX = getObjectPosition().x +  0.025 * Math.sin(Math.toRadians(getDirection()));
+			double frontY = getObjectPosition().y +  0.025 * Math.cos(Math.toRadians(getDirection()));
+			Bullet b = new Bullet(this,new Point.Double(frontX,frontY), getDirection());
+			currentGame.addObjectToArena(b);
+		}
+		else
+			ticksSinceLastShot++;
 	}
 
 	/**

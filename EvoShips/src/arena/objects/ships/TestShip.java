@@ -12,8 +12,7 @@ public class TestShip extends AbstractShip
 	@Override
 	public void determineAction() 
 	{
-		// TODO Auto-generated method stub
-
+		fire = true;
 	}
 
 	@Override

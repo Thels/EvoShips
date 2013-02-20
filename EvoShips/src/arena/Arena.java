@@ -101,6 +101,8 @@ public class Arena extends Observable implements Runnable
 
 			//In order for each tick to be fair, the list of object is shuffled here.
 			Collections.shuffle(arenaObjects);
+			
+			collisionManager.checkForCollisions();
 
 			//Go through each object, find all of the ships, useful to have a list of them.
 			//If it's a ship, then find out what it wants to do for the next tick.
