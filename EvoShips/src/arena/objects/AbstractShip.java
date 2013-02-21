@@ -3,6 +3,7 @@ package arena.objects;
 import java.awt.Point;
 
 import arena.Arena;
+import arena.ArenaWatcher;
 import arena.collisions.CollisionPolygon;
 import arena.objects.objects.Bullet;
 
@@ -243,6 +244,17 @@ public abstract class AbstractShip extends AbstractObject
 	public void setCloneOfShip(AbstractShip motherShip)
 	{
 		this.cloneOfShip = motherShip;
+	}
+	
+	/**
+	 * Get the arena watcher that this ship is to use. 
+	 * Could forsee some errors if this was called in a ships constructor.
+	 * 
+	 * @return arenawatcher to get information from.
+	 */
+	protected ArenaWatcher getShipsArenaWatcher()
+	{
+		return this.currentGame.getArenaWatcher();
 	}
 
 }
