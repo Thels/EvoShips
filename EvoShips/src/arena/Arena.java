@@ -197,12 +197,11 @@ public class Arena extends Observable implements Runnable
 	/**
 	 * This method will add a given ship to the arena, it will do this by copying it into a new ship, and adding it into the score map.
 	 * @param shipToAdd Ship to add to the arena.
-	 * @throws GameAlreadySetException Thrown if for some reason the ship already has a game set.
 	 */
-	public void addShipToArena(AbstractShip shipToAdd) throws GameAlreadyRunningException
+	public void addShipToArena(AbstractShip shipToAdd)
 	{
 		if(gameRunning)
-			throw new GameAlreadyRunningException("addShipToArena");
+			return;
 
 		AbstractShip copy = shipToAdd.cloneShip();
 		if(copy.setCurrentGame(this))
