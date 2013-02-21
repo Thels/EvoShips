@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import arena.collisions.CollisionManager;
-import arena.exceptions.GameAlreadyRunningException;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 import arena.objects.EObjects;
