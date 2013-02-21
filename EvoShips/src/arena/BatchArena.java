@@ -20,8 +20,13 @@ public class BatchArena
 {
 
 	private final int MAX_THREADS = 5;
-	
-	
+
+	private ArrayList<AbstractShip> batchShips;
+	private int gamesToRun, maxAsteroids, asteroidSpawnChance;
+
+	private ExecutorService threadPool;
+
+
 	/**
 	 * Creates a new batch arena.
 	 * @param batchShips Shisp to be used in the arenas.
@@ -31,19 +36,30 @@ public class BatchArena
 	 */
 	public BatchArena(ArrayList<AbstractShip> batchShips, int numberOfGames, int maxAsteroids, int asteroidSpawnChance) 
 	{
-		ExecutorService threadPool = Executors.newFixedThreadPool(MAX_THREADS);
-		
-		Arena[] arenaThreads = new Arena[numberOfGames];
-		
-		for(int i = 0 ; i < numberOfGames ; i++)
+		this.batchShips = batchShips;
+		this.gamesToRun = numberOfGames;
+		this.maxAsteroids = maxAsteroids;
+		this.asteroidSpawnChance = asteroidSpawnChance;
+
+		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
+	}
+
+	public void startBatch()
+	{
+		System.out.println("=== Starting Batch ===");
+		Arena[] arenaThreads = new Arena[gamesToRun];
+
+		for(int i = 0 ; i < gamesToRun ; i++)
 		{
 			arenaThreads[i] = new Arena(maxAsteroids, asteroidSpawnChance, 0);
 			for(AbstractShip ship : batchShips)
 			{
 				arenaThreads[i].addShipToArena(ship);
 			}
+			threadPool.execute(arenaThreads[i]);
 		}
 		
+		System.out.println("=== All Threads Queud ===");
 	}
 
 }
