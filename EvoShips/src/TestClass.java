@@ -16,6 +16,10 @@ public class TestClass
 		TestShip test3 = new TestShip("TestShip #3");
 		TestShip test4 = new TestShip("TestShip #4");
 		
+		
+		
+	
+		
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(test1);
 		ships.add(test2);

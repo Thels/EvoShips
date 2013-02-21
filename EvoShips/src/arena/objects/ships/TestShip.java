@@ -1,5 +1,6 @@
 package arena.objects.ships;
 
+import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
 
 public class TestShip extends AbstractShip 
@@ -13,6 +14,9 @@ public class TestShip extends AbstractShip
 	public void determineAction() 
 	{
 		fire = true;
+		
+		
+	
 	}
 
 	@Override

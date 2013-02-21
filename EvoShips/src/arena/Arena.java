@@ -35,6 +35,8 @@ public class Arena extends Observable implements Runnable
 	private final int TICKS_PER_ALIVE_SCORE = 20;
 
 	private HashMap<AbstractShip, Integer> scoreMap;
+	
+	private ArrayList<AbstractShip> arenaShips;
 
 
 	/*
@@ -67,6 +69,7 @@ public class Arena extends Observable implements Runnable
 		this.arenaWatcher = new ArenaWatcher();
 		this.scoreMap = new HashMap<AbstractShip, Integer>();
 		this.arenaObjects = new ArrayList<AbstractObject>();
+		this.arenaShips = new ArrayList<AbstractShip>();
 	}
 
 	@Override
@@ -130,13 +133,13 @@ public class Arena extends Observable implements Runnable
 			//TODO Spawn asteroids. Needs AsteroidFactory from prototype.
 
 			this.arenaTickCount++;
-			if(arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
+			if(this.arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
 			{
 				for(AbstractShip ship : currentShips)
 					ship.incrementScore(1);
 			}
 
-			gameRunning = updateGameStatus(currentShips);
+			gameRunning = updateGameStatus(arenaShips);
 
 			try 
 			{
@@ -223,6 +226,7 @@ public class Arena extends Observable implements Runnable
 		AbstractShip copy = shipToAdd.cloneShip();
 		if(copy.setCurrentGame(this))
 		{
+			arenaShips.add(copy);
 			arenaObjects.add(copy);
 			scoreMap.put(copy, 0);
 		}
