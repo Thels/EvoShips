@@ -160,10 +160,30 @@ public class Arena extends Observable implements Runnable
 		if(this.arenaTickCount == MAX_GAME_TICKS)
 			return false;
 		
+		int aliveCount = 0;
+		AbstractShip aliveShip = null;
+		
 		for(AbstractShip ship : gameShips)
+		{
 			if(ship.isObjectAlive())
-				return true;
-		return false;
+			{
+				aliveCount++;
+				aliveShip = ship;
+			}
+		}
+		
+		//Clause to see if two ships have managed to die on exactly the same tick ( unlikely ).
+		if(aliveCount == 0)
+			return false;
+		
+		//If one ships is alive at the end of the arena fight, then award that ship some points for winning. Hooray, points.
+		else if(aliveCount == 1)
+		{
+			aliveShip.incrementScore(50);
+			return false;
+		}
+		else return true;
+			
 	}
 
 
