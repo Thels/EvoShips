@@ -3,10 +3,10 @@ package arena.objects.ships;
 import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
 
-public class TestShip extends AbstractShip 
+public class PlayerTurretShip extends AbstractShip 
 {
 	ArenaWatcher shipWatcher;
-	public TestShip(String shipName) 
+	public PlayerTurretShip(String shipName) 
 	{
 		super(shipName);
 	}
@@ -33,9 +33,9 @@ public class TestShip extends AbstractShip
 	}
 
 	@Override
-	public TestShip cloneShip() 
+	public PlayerTurretShip cloneShip() 
 	{
-		TestShip returnShip = new TestShip(this.getShipName());
+		PlayerTurretShip returnShip = new PlayerTurretShip(this.getShipName());
 		returnShip.setCloneOfShip(this);
 		return returnShip;
 	}
