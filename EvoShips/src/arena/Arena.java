@@ -1,14 +1,17 @@
 package arena;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Observable;
+import java.util.Random;
 
 import arena.collisions.CollisionManager;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
+import arena.objects.AsteroidFactory;
 import arena.objects.EObjects;
+import arena.objects.objects.Bullet;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -29,7 +32,7 @@ public class Arena extends Observable implements Runnable
 	private final int MAX_GAME_TICKS = 30000;
 
 	//Amount of ticks that must happen in between every asteroid spawning.
-	private final int ASTEROID_SPAWN_DELAY = 20;
+	private final int ASTEROID_SPAWN_DELAY = 50;
 
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
 	private final int TICKS_PER_ALIVE_SCORE = 100;
@@ -71,8 +74,10 @@ public class Arena extends Observable implements Runnable
 	@Override
 	public void run() 
 	{
+		Random r = new Random();
 		gameRunning = true;
 		int currentAsteroidCount;
+		int ticksSinceLastAsteroidSpawn = 0;
 
 		ArrayList<AbstractShip> currentShips = new ArrayList<AbstractShip>();
 		addList = new ArrayList<AbstractObject>();
@@ -126,7 +131,13 @@ public class Arena extends Observable implements Runnable
 					removeList.add(obj);
 			}
 
-			//TODO Spawn asteroids. Needs AsteroidFactory from prototype.
+			if(r.nextDouble() <= asteroidSpawnChanceNorm && currentAsteroidCount < maxAsteroids && ticksSinceLastAsteroidSpawn >= ASTEROID_SPAWN_DELAY)
+			{	
+				ticksSinceLastAsteroidSpawn = 0;
+				addObjectToArena(AsteroidFactory.createOffScreenAsteroid());
+			}
+			else
+				ticksSinceLastAsteroidSpawn++;
 
 			this.arenaTickCount++;
 			if(this.arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
