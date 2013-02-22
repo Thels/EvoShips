@@ -31,8 +31,8 @@ public class Arena extends Observable implements Runnable
 	//Amount of ticks that must happen in between every asteroid spawning.
 	private final int ASTEROID_SPAWN_DELAY = 20;
 
-	//This variable represents how many ticks have to occur before ships are given their 5 points for surviving.
-	private final int TICKS_PER_ALIVE_SCORE = 20;
+	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
+	private final int TICKS_PER_ALIVE_SCORE = 100;
 	
 	private ArrayList<AbstractShip> arenaShips;
 
