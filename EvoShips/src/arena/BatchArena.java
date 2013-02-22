@@ -3,7 +3,6 @@ package arena;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import arena.objects.AbstractShip;
 
 /**
@@ -66,6 +65,15 @@ public class BatchArena
 		while(!threadPool.isTerminated())
 		{
 			//Busy wait, to wait for the batch to complete fully. Can't think of another way to do this.
+		}
+		
+		System.out.println("Completed batch: Scores below.");
+		System.out.println("==================");
+		for(AbstractShip ship : batchShips)
+		{
+			System.out.println("Name  : "+ship.getShipName());
+			System.out.println("Score : "+ship.getScore());
+			System.out.println("==================");
 		}
 					
 	}

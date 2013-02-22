@@ -11,7 +11,7 @@ public class TestClass
 
 	public TestClass() 
 	{
-		int GAME_COUNT = 1000;
+		int GAME_COUNT = 100;
 		PlayerTurretShip test1 = new PlayerTurretShip("TestShip #1");
 		PlayerTurretShip test2 = new PlayerTurretShip("TestShip #2");
 		PlayerTurretShip test3 = new PlayerTurretShip("TestShip #3");
@@ -28,12 +28,7 @@ public class TestClass
 		
 		
 	}
-	
-	
-	public void connect(int ... ts)
-	{
-		
-	}
+
 	
 	public static void main(String[] args)
 	{
