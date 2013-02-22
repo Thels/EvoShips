@@ -33,11 +33,8 @@ public class Arena extends Observable implements Runnable
 
 	//This variable represents how many ticks have to occur before ships are given their 5 points for surviving.
 	private final int TICKS_PER_ALIVE_SCORE = 20;
-
-	private HashMap<AbstractShip, Integer> scoreMap;
 	
 	private ArrayList<AbstractShip> arenaShips;
-
 
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
@@ -67,7 +64,6 @@ public class Arena extends Observable implements Runnable
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);
 		this.arenaWatcher = new ArenaWatcher();
-		this.scoreMap = new HashMap<AbstractShip, Integer>();
 		this.arenaObjects = new ArrayList<AbstractObject>();
 		this.arenaShips = new ArrayList<AbstractShip>();
 	}
@@ -227,7 +223,6 @@ public class Arena extends Observable implements Runnable
 		{
 			arenaShips.add(copy);
 			arenaObjects.add(copy);
-			scoreMap.put(copy, 0);
 		}
 	}
 
