@@ -150,7 +150,6 @@ public class Arena extends Observable implements Runnable
 				e.printStackTrace();
 			}
 		}
-		System.out.println("game ended after "+this.arenaTickCount+"   ticks.");
 	}
 
 	/**

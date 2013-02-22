@@ -3,6 +3,7 @@ package arena;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import arena.objects.AbstractShip;
 
@@ -19,7 +20,7 @@ import arena.objects.AbstractShip;
 public class BatchArena 
 {
 
-	private final int MAX_THREADS = 6;
+	private final int MAX_THREADS = 4;
 
 	private ArrayList<AbstractShip> batchShips;
 	private int gamesToRun, maxAsteroids, asteroidSpawnChance;
@@ -44,9 +45,11 @@ public class BatchArena
 		threadPool = Executors.newFixedThreadPool(MAX_THREADS);
 	}
 
+	/**
+	 * Start this batch.
+	 */
 	public void startBatch()
 	{
-		System.out.println("=== Starting Batch ===");
 		Arena[] arenaThreads = new Arena[gamesToRun];
 
 		for(int i = 0 ; i < gamesToRun ; i++)
@@ -59,7 +62,13 @@ public class BatchArena
 			threadPool.execute(arenaThreads[i]);
 		}
 		
-		System.out.println("=== All Threads Queud ===");
+		threadPool.shutdown();
+		
+		while(!threadPool.isTerminated())
+		{
+			//Busy wait, to wait for the batch to complete fully. Can't think of another way to do this.
+		}
+					
 	}
 
 }
