@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import arena.Arena;
 import arena.BatchArena;
 import arena.objects.AbstractShip;
+import arena.objects.ships.DerpShip;
 import arena.objects.ships.PlayerTurretShip;
 
 
@@ -11,8 +12,8 @@ public class TestClass
 
 	public TestClass() 
 	{
-		int GAME_COUNT = 100;
-		PlayerTurretShip test1 = new PlayerTurretShip("TestShip #1");
+		int GAME_COUNT = 250;
+		DerpShip test1 = new DerpShip("DerpShip #1");
 		PlayerTurretShip test2 = new PlayerTurretShip("TestShip #2");
 		PlayerTurretShip test3 = new PlayerTurretShip("TestShip #3");
 		PlayerTurretShip test4 = new PlayerTurretShip("TestShip #4");
@@ -23,7 +24,7 @@ public class TestClass
 		ships.add(test3);
 		ships.add(test4);
 		
-		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 5);
+		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 1);
 		batchTest.startBatch();
 		
 		

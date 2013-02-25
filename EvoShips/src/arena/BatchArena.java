@@ -61,21 +61,16 @@ public class BatchArena
 		}
 		
 		threadPool.shutdown();
-		
-		while(!threadPool.isTerminated())
-		{
-			//Busy wait, to wait for the batch to complete fully. Can't think of another way to do this.
-		}
-		
-		System.out.println("Completed batch: Scores below.");
-		System.out.println("==================");
-		for(AbstractShip ship : batchShips)
-		{
-			System.out.println("Name  : "+ship.getShipName());
-			System.out.println("Score : "+ship.getScore());
-			System.out.println("==================");
-		}
-					
+		//Ask for all threads to be executed.
+	}
+	
+	/**
+	 * Get whether or not the thread pool is still executing.
+	 * @return Whether the thread pool is terminated.
+	 */
+	public boolean isBatchRunning()
+	{
+		return threadPool.isTerminated();
 	}
 
 }
