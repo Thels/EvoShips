@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import ui.UITest;
+
 import arena.Arena;
 import arena.BatchArena;
 import arena.objects.AbstractShip;
@@ -12,20 +14,22 @@ public class TestClass
 
 	public TestClass() 
 	{
-		int GAME_COUNT = 250;
-		DerpShip test1 = new DerpShip("DerpShip #1");
-		PlayerTurretShip test2 = new PlayerTurretShip("TestShip #2");
-		PlayerTurretShip test3 = new PlayerTurretShip("TestShip #3");
-		PlayerTurretShip test4 = new PlayerTurretShip("TestShip #4");
+//		int GAME_COUNT = 250;
+//		DerpShip test1 = new DerpShip("DerpShip #1");
+//		PlayerTurretShip test2 = new PlayerTurretShip("TestShip #2");
+//		PlayerTurretShip test3 = new PlayerTurretShip("TestShip #3");
+//		PlayerTurretShip test4 = new PlayerTurretShip("TestShip #4");
+//		
+//		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
+//		ships.add(test1);
+//		ships.add(test2);
+//		ships.add(test3);
+//		ships.add(test4);
+//		
+//		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 1);
+//		batchTest.startBatch();
 		
-		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
-		ships.add(test1);
-		ships.add(test2);
-		ships.add(test3);
-		ships.add(test4);
-		
-		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 1);
-		batchTest.startBatch();
+		UITest test = new UITest();
 		
 		
 	}
