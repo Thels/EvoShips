@@ -98,10 +98,13 @@ public class Arena extends Observable implements Runnable
 			//Ensure arena watcher is using most updated object list.
 			arenaWatcher.setObjects(arenaObjects);
 
-
 			//If we have an observer then update.
 			if(this.countObservers()>0)
-				notifyObservers();
+			{
+				setChanged();
+				notifyObservers(arenaObjects);
+			}
+				
 			
 			
 			

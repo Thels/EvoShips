@@ -16,11 +16,11 @@ public class UITest
 		AbstractShip test1 = new AsteroidTurretShip("Yarrrr");
 		AbstractShip test2 = new AsteroidTurretShip("Yaaarp");
 
-		Arena testGame = new Arena(20, 1, 5);
+		Arena testGame = new Arena(20, 1, 10);
 		testGame.addShipToArena(test1);
 		testGame.addShipToArena(test2);
 		
-		ArenaFrame frame = new ArenaFrame(testGame, new Dimension(500,500));
+		ArenaFrame frame = new ArenaFrame(testGame, new Dimension(650,650));
 		
 	}
 
