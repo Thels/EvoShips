@@ -1,8 +1,10 @@
 package arena;
 
 import java.util.ArrayList;
+import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import arena.objects.AbstractShip;
 
 /**
@@ -53,6 +55,7 @@ public class BatchArena
 		for(int i = 0 ; i < gamesToRun ; i++)
 		{
 			arenaThreads[i] = new Arena(maxAsteroids, asteroidSpawnChance, 0);
+			
 			for(AbstractShip ship : batchShips)
 			{
 				arenaThreads[i].addShipToArena(ship);

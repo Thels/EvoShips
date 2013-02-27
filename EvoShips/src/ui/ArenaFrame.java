@@ -19,6 +19,17 @@ public class ArenaFrame extends JFrame
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		game.run();
+		
+		boolean gameRunning = game.isGameRunning();
+		
+		while(gameRunning)
+			gameRunning = game.isGameRunning();
+		
+		remove(arenaPanel);
+		
+		add(new ScorePanel(game.getInitialShips()));
+		
+			
 	}
 	
 	

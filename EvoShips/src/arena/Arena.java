@@ -35,7 +35,8 @@ public class Arena extends Observable implements Runnable
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
 	private final int TICKS_PER_ALIVE_SCORE = 500;
 	
-	private ArrayList<AbstractShip> arenaShips;
+	//initialShips holds a reference to the ships ( non cloned, for scoring purposes. )
+	private ArrayList<AbstractShip> arenaShips, initialShips;
 
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
@@ -68,6 +69,7 @@ public class Arena extends Observable implements Runnable
 		this.arenaWatcher = new ArenaWatcher();
 		this.arenaObjects = new ArrayList<AbstractObject>();
 		this.arenaShips = new ArrayList<AbstractShip>();
+		this.initialShips = new ArrayList<AbstractShip>();
 	}
 
 	@Override
@@ -239,6 +241,8 @@ public class Arena extends Observable implements Runnable
 	{
 		if(gameRunning)
 			return;
+		
+		initialShips.add(shipToAdd);
 
 		AbstractShip copy = shipToAdd.cloneShip();
 		if(copy.setCurrentGame(this))
@@ -258,6 +262,24 @@ public class Arena extends Observable implements Runnable
 			addList.add(object);
 		else
 			arenaObjects.add(object);
+	}
+	
+	/**
+	 * Retrieve whether or not the game is currently running, useful for UI elements.
+	 * @return Whether the game logic loops is still running.
+	 */
+	public boolean isGameRunning()
+	{
+		return this.gameRunning;
+	}
+	
+	/**
+	 * Get the initial ships that were used to create this arena, the non-cloned ones.
+	 * @return List generated when adding ships to the arena.
+	 */
+	public ArrayList<AbstractShip> getInitialShips()
+	{
+		return this.initialShips;
 	}
 
 
