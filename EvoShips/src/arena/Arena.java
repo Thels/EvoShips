@@ -33,7 +33,7 @@ public class Arena extends Observable implements Runnable
 	private final int ASTEROID_SPAWN_DELAY = 50;
 
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
-	private final int TICKS_PER_ALIVE_SCORE = 100;
+	private final int TICKS_PER_ALIVE_SCORE = 500;
 	
 	private ArrayList<AbstractShip> arenaShips;
 
@@ -46,7 +46,7 @@ public class Arena extends Observable implements Runnable
 	 */
 	private ArrayList<AbstractObject> arenaObjects, addList, removeList;
 	private int maxAsteroids, tickDelay, arenaTickCount;
-	private double asteroidSpawnChanceNorm;
+	private float asteroidSpawnChanceNorm;
 	private CollisionManager collisionManager;
 	private ArenaWatcher arenaWatcher;
 
@@ -60,7 +60,8 @@ public class Arena extends Observable implements Runnable
 	 */
 	public Arena(int maxAsteroidCount, int asteroidSpawnChance, int tickDelay)
 	{
-		this.asteroidSpawnChanceNorm = (double)asteroidSpawnChance / 100;
+		this.asteroidSpawnChanceNorm = (float)((double)asteroidSpawnChance / (double)100);
+		this.maxAsteroids = maxAsteroidCount;
 		this.tickDelay = tickDelay;
 		this.arenaTickCount = 0;
 		this.collisionManager = new CollisionManager(this);

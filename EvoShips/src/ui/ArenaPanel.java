@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import arena.Arena;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
+import arena.objects.objects.Asteroid;
 import arena.objects.objects.Bullet;
 
 /**
@@ -60,6 +61,7 @@ public class ArenaPanel extends JPanel implements Observer
 			{
 			case OBJ_SHIP: drawShip((AbstractShip) obj,g2); break;
 			case OBJ_BULLET: drawBullet((Bullet) obj, g2); break;
+			case OBJ_ASTEROID: drawAsteroid((Asteroid) obj, g2); break;
 			default: continue;
 			
 			}
@@ -75,6 +77,30 @@ public class ArenaPanel extends JPanel implements Observer
 				(int)((bulllet.getObjectPosition().y-0.003125)*displayScale),
 				(int)(0.00625*displayScale),
 				(int)(0.00625*displayScale));
+	}
+	
+	//TODO, lots ofjavadoc.
+	
+	private void drawAsteroid(Asteroid asteroid, Graphics2D g2)
+	{
+		System.out.println("{Drawing");
+		int complexity = asteroid.getAsteroidComplexity();	
+		int[] xPoints = new int[complexity];
+		int[] yPoints = new int[complexity];
+		
+		double angle = 0;
+		
+		for(int i = 0 ; i < complexity; i++)
+		{
+			xPoints[i] = (int)(displayScale * (asteroid.getObjectPosition().x + (asteroid.ASTEROID_SIZE/2 * Math.cos(Math.toRadians(angle)))));
+			yPoints[i] = (int)(displayScale * (asteroid.getObjectPosition().y + (asteroid.ASTEROID_SIZE/2 * Math.sin(Math.toRadians(angle)))));
+			angle += asteroid.getTheta();
+		}
+		
+		g2.setColor(Color.LIGHT_GRAY);
+		g2.setStroke(new BasicStroke(2F));
+		g2.drawPolygon(xPoints, yPoints, complexity);
+		
 	}
 
 
