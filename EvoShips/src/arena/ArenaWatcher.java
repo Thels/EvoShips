@@ -52,9 +52,6 @@ public class ArenaWatcher
 		AbstractShip nearestShip = null;
 		double disToNearest = Double.POSITIVE_INFINITY;
 
-		// now we have nearest tank work out direction from tank t
-		// in polar coordinates
-
 		for(AbstractObject enemy: ships)
 		{
 			double newDistance = distanceBetweenPoints(check.getObjectPosition(), enemy.getObjectPosition());
@@ -92,30 +89,6 @@ public class ArenaWatcher
 		return nearestAsteroid;
 	}
 
-	public double distanceToLeftWall(AbstractObject check) 
-	{
-		// TODO Auto-generated method stub
-		return check.getObjectPosition().x;
-	}
-
-
-	public double distanceToRightWall(AbstractObject check) 
-	{
-		// TODO Auto-generated method stub
-		return 1 - check.getObjectPosition().x;
-	}
-
-	public double distanceToTopWall(AbstractObject check) 
-	{
-		// TODO Auto-generated method stub
-		return check.getObjectPosition().y;
-	}
-
-	public double distanceToBottomWall(AbstractObject check) 
-	{
-		// TODO Auto-generated method stub
-		return 1-check.getObjectPosition().y;
-	}
 
 	public double distanceToNearestAsteroid(AbstractObject check, Asteroid nearestAsteroid)
 	{
@@ -123,6 +96,7 @@ public class ArenaWatcher
 			return Double.POSITIVE_INFINITY;
 		return distanceBetweenPoints(check.getObjectPosition(),nearestAsteroid.getObjectPosition());
 	}
+	
 	public double angleToPoint(AbstractObject check, Point.Double point)
 	{
 		double dx, dy;
@@ -166,7 +140,7 @@ public class ArenaWatcher
 		dy = nearestEnemy.getObjectPosition().y - check.getObjectPosition().y;
 
 		double angleInDegrees = ((Math.atan2(dx, dy)) * 180 / Math.PI);
-		final double targetDir = angleInDegrees;
+		double targetDir = angleInDegrees;
 
 		if(targetDir >= check.getDirection())
 		{

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import arena.Arena;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
+import arena.objects.objects.Bullet;
 
 /**
  * The arena panel is used whenever the arena has to be drawn for single game-purposes.
@@ -58,12 +59,23 @@ public class ArenaPanel extends JPanel implements Observer
 			switch(obj.getObjectType())
 			{
 			case OBJ_SHIP: drawShip((AbstractShip) obj,g2); break;
+			case OBJ_BULLET: drawBullet((Bullet) obj, g2); break;
 			default: continue;
 			
 			}
 		}
 	}
 
+	
+	private void drawBullet(Bullet bulllet, Graphics2D g2)
+	{
+		g2.setColor(Color.WHITE);
+		g2.setStroke(new BasicStroke(1.5F));
+		g2.drawOval((int)((bulllet.getObjectPosition().x-0.003125)*displayScale),
+				(int)((bulllet.getObjectPosition().y-0.003125)*displayScale),
+				(int)(0.00625*displayScale),
+				(int)(0.00625*displayScale));
+	}
 
 
 

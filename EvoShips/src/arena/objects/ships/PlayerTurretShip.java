@@ -14,7 +14,8 @@ public class PlayerTurretShip extends AbstractShip
 	@Override
 	public void determineAction() 
 	{
-		fire = true;
+		resetActionBooleans();
+	
 		shipWatcher = getShipsArenaWatcher();
 		
 		AbstractShip nearestShip = shipWatcher.getNearestShip(this);
@@ -22,14 +23,13 @@ public class PlayerTurretShip extends AbstractShip
 		{
 			double angleToShip = shipWatcher.angleToNearestObject(this, nearestShip);
 			if(angleToShip < 0)
-				left = true;
-			else
 				right = true;
+			else
+				left = true;
 			
+			fire = true;
 		}
 
-		
-	
 	}
 
 	@Override
