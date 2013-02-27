@@ -30,7 +30,7 @@ public class Arena extends Observable implements Runnable
 	private final int MAX_GAME_TICKS = 30000;
 
 	//Amount of ticks that must happen in between every asteroid spawning.
-	private final int ASTEROID_SPAWN_DELAY = 500;
+	private final int ASTEROID_SPAWN_DELAY = 200;
 
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
 	private final int TICKS_PER_ALIVE_SCORE = 500;
@@ -76,7 +76,9 @@ public class Arena extends Observable implements Runnable
 		Random r = new Random();
 		gameRunning = true;
 		int currentAsteroidCount;
-		int ticksSinceLastAsteroidSpawn = 0;
+		
+		//Set to max value to spawn one at start.
+		int ticksSinceLastAsteroidSpawn = ASTEROID_SPAWN_DELAY;
 
 		ArrayList<AbstractShip> currentShips = new ArrayList<AbstractShip>();
 		addList = new ArrayList<AbstractObject>();
