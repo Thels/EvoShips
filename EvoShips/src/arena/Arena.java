@@ -1,6 +1,5 @@
 package arena;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
@@ -11,7 +10,6 @@ import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 import arena.objects.AsteroidFactory;
 import arena.objects.EObjects;
-import arena.objects.objects.Bullet;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -101,6 +99,13 @@ public class Arena extends Observable implements Runnable
 			arenaWatcher.setObjects(arenaObjects);
 
 
+			//If we have an observer then update.
+			if(this.countObservers()>0)
+				notifyObservers();
+			
+			
+			
+			
 			//In order for each tick to be fair, the list of object is shuffled here.
 			Collections.shuffle(arenaObjects);
 			
