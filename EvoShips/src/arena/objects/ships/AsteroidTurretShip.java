@@ -2,6 +2,7 @@ package arena.objects.ships;
 
 import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
+import arena.objects.objects.Asteroid;
 
 public class AsteroidTurretShip extends AbstractShip 
 {
@@ -14,17 +15,18 @@ public class AsteroidTurretShip extends AbstractShip
 	@Override
 	public void determineAction() 
 	{
+		resetActionBooleans();
 		fire = true;
 		shipWatcher = getShipsArenaWatcher();
 		
-		AbstractShip nearestShip = shipWatcher.getNearestShip(this);
-		if(nearestShip != null)
+		Asteroid nearestAst = shipWatcher.getNearestAsteroid(this);
+		if(nearestAst != null)
 		{
-			double angleToShip = shipWatcher.angleToNearestObject(this, nearestShip);
+			double angleToShip = shipWatcher.angleToNearestObject(this, nearestAst);
 			if(angleToShip < 0)
-				left = true;
-			else
 				right = true;
+			else
+				left = true;
 			
 		}
 
