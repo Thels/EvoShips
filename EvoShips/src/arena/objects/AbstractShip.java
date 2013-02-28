@@ -255,7 +255,7 @@ public abstract class AbstractShip extends AbstractObject
 	 * 
 	 * @return arenawatcher to get information from.
 	 */
-	protected ArenaWatcher getShipsArenaWatcher()
+	public ArenaWatcher getShipsArenaWatcher()
 	{
 		return this.currentGame.getArenaWatcher();
 	}

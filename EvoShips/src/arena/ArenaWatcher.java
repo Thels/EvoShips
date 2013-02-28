@@ -315,6 +315,19 @@ public class ArenaWatcher
 		double angle = angleToNearestAsteroid(checkObject);
 		return angle/=180;
 	}
+	
+	/**
+	 * Calculate the angle to the nearest enemy bullet and return it normalised.
+	 * 
+	 * The normalised angle has to be between -1 and 1.
+	 * @param check Object to calculate angle from.
+	 * @return Normalised value of the angle to nearest enemy bullet, infinity if no bullet nearby.
+	 */
+	public double normalisedAngleNearestEnemyBullet(AbstractObject checkObject)
+	{
+		double angle = angleToNearestEnemyBullet(checkObject);
+		return angle/=180;
+	}
 
 	/**
 	 * Get the number of bullets currently in the arnea that belong to a given ship.

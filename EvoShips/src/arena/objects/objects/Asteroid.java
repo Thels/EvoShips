@@ -10,7 +10,6 @@ import arena.objects.EObjects;
 public class Asteroid extends AbstractObject 
 {
 	private final double ASTEROID_SPEED = 0.001;
-	//TODO comment public
 	public final double ASTEROID_SIZE = 0.08;
 	private final int MAX_TICKS = 1400;
 	private double theta;
