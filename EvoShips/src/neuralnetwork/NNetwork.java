@@ -1,5 +1,7 @@
 package neuralnetwork;
 
+import genetic.Chromosome;
+
 import java.util.List;
 
 import arena.objects.AbstractShip;
@@ -15,16 +17,19 @@ public class NNetwork
 	//Arrays the represent the neurons inside the neural network.
 	private Neuron inputNeurons[], outputNeurons[], hiddenNeurons[][];
 	private NetworkInputs[] inputs;
+	private Chromosome chromosome;
 	
 	/**
 	 * Create a new neural network, with the given amount of input / hidden / output layers.
+	 * @param chromosome Chromosome to be used by this neural network.
 	 * @param inputCount Number of input layers.
 	 * @param hiddenCount Number of hidden neurons in each layer.
 	 * @param numberHiddenLayers Number of hidden layers that exist in the NN.
 	 * @param outputCount Number of output layers.
 	 */
-	public NNetwork(int inputCount, int hiddenCount, int numberHiddenLayers, int outputCount) 
+	public NNetwork(Chromosome chromosome, int inputCount, int hiddenCount, int numberHiddenLayers, int outputCount) 
 	{
+		this.chromosome = chromosome;
 		inputNeurons = new Neuron[inputCount];
 		outputNeurons = new Neuron[outputCount];
 		hiddenNeurons = new Neuron[numberHiddenLayers][hiddenCount];
@@ -73,18 +78,24 @@ public class NNetwork
 	 * messy code.
 	 * 
 	 * For connecting the neurons, we work from the far right to the left, as to ensure that the
-	 * connections are working properly.
+	 * connections are setup correctly.
+	 * 
+	 * 
 	 * @param hiddenCount Number of neurons in each hidden layer.
 	 * @param hiddenLayerCount Number of hidden layers.
 	 */
 	private void setupNeuronConnections(int hiddenCount, int hiddenLayerCount)
 	{
+		//Index to keep track of the current weight to be used for a connection from a chromosome.
+		int weightIndex = 0;
+		double[] weightArray = this.chromosome.getWeights();
+		
 		for(int i = 0 ; i < outputNeurons.length; i++)
 		{
 			for(int j = 0 ; j < hiddenCount; j++)
 			{
-				//TODO Get weight from a given chromosome.
-				outputNeurons[i].connectToNeuron(hiddenNeurons[hiddenLayerCount-1][j], 0.5);
+				outputNeurons[i].connectToNeuron(hiddenNeurons[hiddenLayerCount-1][j], weightArray[weightIndex]);
+				weightIndex++;
 			}
 		}
 		
@@ -94,8 +105,8 @@ public class NNetwork
 			{
 				for(int k = 0; k < hiddenCount; k++)
 				{
-					//TODO Get Weight from a given chromosome.
-					hiddenNeurons[i][j].connectToNeuron(hiddenNeurons[i-1][k], 0.5);
+					hiddenNeurons[i][j].connectToNeuron(hiddenNeurons[i-1][k], weightArray[weightIndex]);
+					weightIndex++;
 				}
 				
 			}
@@ -105,8 +116,8 @@ public class NNetwork
 		{
 			for(int j = 0; j < inputNeurons.length; j++)
 			{
-				//TODO Get weight from a given chromosome.
-				hiddenNeurons[0][i].connectToNeuron(inputNeurons[j], 0.5);
+				hiddenNeurons[0][i].connectToNeuron(inputNeurons[j], weightArray[weightIndex]);
+				weightIndex++;
 			}
 		}
 	}
