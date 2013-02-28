@@ -3,10 +3,10 @@ package arena.objects.ships;
 import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
 
-public class PlayerTurretShip extends AbstractShip 
+public class KamakazieShip extends AbstractShip 
 {
 	ArenaWatcher shipWatcher;
-	public PlayerTurretShip(String shipName) 
+	public KamakazieShip(String shipName) 
 	{
 		super(shipName);
 	}
@@ -17,7 +17,7 @@ public class PlayerTurretShip extends AbstractShip
 		resetActionBooleans();
 	
 		shipWatcher = getShipsArenaWatcher();
-		
+		forward = true;
 		AbstractShip nearestShip = shipWatcher.getNearestShip(this);
 		if(nearestShip != null)
 		{
@@ -33,9 +33,9 @@ public class PlayerTurretShip extends AbstractShip
 	}
 
 	@Override
-	public PlayerTurretShip cloneShip() 
+	public KamakazieShip cloneShip() 
 	{
-		PlayerTurretShip returnShip = new PlayerTurretShip(this.getShipName());
+		KamakazieShip returnShip = new KamakazieShip(this.getShipName());
 		returnShip.setCloneOfShip(this);
 		return returnShip;
 	}

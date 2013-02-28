@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import arena.Arena;
 import arena.objects.AbstractShip;
 import arena.objects.ships.AsteroidHunter;
-import arena.objects.ships.AsteroidTurretShip;
-import arena.objects.ships.PlayerTurretShip;
+import arena.objects.ships.AsteroidTurret;
+import arena.objects.ships.Turret;
 
 public class UITest 
 {
