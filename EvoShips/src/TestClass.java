@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 
-import ui.UITest;
-
-import arena.Arena;
 import arena.BatchArena;
 import arena.objects.AbstractShip;
+import arena.objects.ships.AsteroidHunter;
 import arena.objects.ships.DerpShip;
-import arena.objects.ships.PlayerTurretShip;
 
 
 public class TestClass 
@@ -14,22 +11,31 @@ public class TestClass
 
 	public TestClass() 
 	{
-//		int GAME_COUNT = 250;
-//		DerpShip test1 = new DerpShip("DerpShip #1");
-//		PlayerTurretShip test2 = new PlayerTurretShip("TestShip #2");
-//		PlayerTurretShip test3 = new PlayerTurretShip("TestShip #3");
-//		PlayerTurretShip test4 = new PlayerTurretShip("TestShip #4");
-//		
-//		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
-//		ships.add(test1);
-//		ships.add(test2);
-//		ships.add(test3);
-//		ships.add(test4);
-//		
-//		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 1);
-//		batchTest.startBatch();
+		int GAME_COUNT = 250;
+		DerpShip test1 = new DerpShip("DerpShip #1");
+		AsteroidHunter test2 = new AsteroidHunter("TestShip #2");
+		AsteroidHunter test3 = new AsteroidHunter("TestShip #3");
+		AsteroidHunter test4 = new AsteroidHunter("TestShip #4");
 		
-		UITest test = new UITest();
+		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
+		ships.add(test1);
+		ships.add(test2);
+		ships.add(test3);
+		ships.add(test4);
+		
+		BatchArena batchTest = new BatchArena(ships, GAME_COUNT, 15, 1);
+		batchTest.startBatch();
+		
+		boolean f = false;
+		while(!f)
+		{
+			f = batchTest.isBatchRunning();
+		}
+		
+		for(AbstractShip ship : ships)
+			System.out.println(ship.getShipName()+"    : "+ship.getScore());
+		
+		//UITest test = new UITest();
 		
 		
 	}

@@ -15,7 +15,14 @@ public class ArenaWatcher
 	private List<AbstractObject> ships;
 	private List<AbstractObject> asteroids;
 	private List<AbstractObject> bullets;
+	
+	
+	//Max value used for normalised return values.
+	private final double arenaMaxSize = Math.sqrt(2);
 
+	/**
+	 * Create a new arena watcher, just creates all of the lists that are needed.
+	 */
 	public ArenaWatcher()
 	{
 		ships = new ArrayList<AbstractObject>();
@@ -23,7 +30,10 @@ public class ArenaWatcher
 		bullets = new ArrayList<AbstractObject>();
 	}
 
-
+	/**
+	 * Set the objects that the arena watcher should be using for this given game tick.
+	 * @param gameObjects Game objects to be used by the methods.
+	 */
 	public void setObjects(List<AbstractObject> gameObjects) 
 	{
 		ships.clear();
@@ -40,13 +50,24 @@ public class ArenaWatcher
 		}
 	}
 
+	/**
+	 * Private method to calculate the value of distance between two given points.
+	 * @param first First point to check.
+	 * @param second Second point to check.
+	 * @return Distance between the two given points.
+	 */
 	private double distanceBetweenPoints(Point.Double first, Point.Double second)
 	{
 		double sqdx = Math.pow((second.x - first.x),2);
 		double sqdy = Math.pow((second.y - first.y),2);
 		return Math.sqrt(sqdx + sqdy);
 	}
-
+	
+	/**
+	 * Gets the ship nearest to the given object.
+	 * @param check Object to check.
+	 * @return Nearest ship if it exists, null otherwise.
+	 */
 	public AbstractShip getNearestShip(AbstractObject check) 
 	{
 		AbstractShip nearestShip = null;
@@ -64,34 +85,38 @@ public class ArenaWatcher
 
 		return nearestShip;
 	}
-
+	
+	/**
+	 * Get the asteroid nearest to the given object.
+	 * @param check Object to check.
+	 * @return Nearest asteroid if it exists, null otherwise.
+	 */
 	public Asteroid getNearestAsteroid(AbstractObject check) 
 	{
 		Asteroid nearestAsteroid = null;
 		double disToNearest = Double.POSITIVE_INFINITY;
 
-		// now we have nearest tank work out direction from tank t
-		// in polar coordinates
-
 		for(AbstractObject enemy: asteroids)
 		{
-			if(enemy.isObjectAlive())
+			double newDistance = distanceBetweenPoints(check.getObjectPosition(), enemy.getObjectPosition());
+			if((newDistance < disToNearest) && !enemy.equals(check) && enemy.isObjectAlive())
 			{
-				double newDistance = distanceBetweenPoints(check.getObjectPosition(), enemy.getObjectPosition());
-				if((newDistance < disToNearest) && !enemy.equals(check) && enemy.isObjectAlive())
-				{
-					disToNearest = newDistance;
-					nearestAsteroid = (Asteroid) enemy;
-				}
+				disToNearest = newDistance;
+				nearestAsteroid = (Asteroid) enemy;
 			}
 		}
 
 		return nearestAsteroid;
 	}
 
-
-	public double distanceToNearestAsteroid(AbstractObject check, Asteroid nearestAsteroid)
+	/**
+	 * Get the distance to the nearest asteroid. If no asteroid can be found, then it returns Double.POSITIVE_INFINITY.
+	 * @param check Object to calculate nearest distance to.
+	 * @return Distance to the nearest asteroid, or INFINITY if no asteroid can be found.
+	 */
+	public double distanceToNearestAsteroid(AbstractObject check)
 	{
+		Asteroid nearestAsteroid = getNearestAsteroid(check);
 		if(nearestAsteroid == null)
 			return Double.POSITIVE_INFINITY;
 		return distanceBetweenPoints(check.getObjectPosition(),nearestAsteroid.getObjectPosition());
