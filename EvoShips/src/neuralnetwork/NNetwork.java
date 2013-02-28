@@ -15,7 +15,6 @@ public class NNetwork
 	//Arrays the represent the neurons inside the neural network.
 	private Neuron inputNeurons[], outputNeurons[], hiddenNeurons[][];
 	private NetworkInputs[] inputs;
-	private NetworkOutputs[] outputs;
 	
 	/**
 	 * Create a new neural network, with the given amount of input / hidden / output layers.
@@ -30,7 +29,6 @@ public class NNetwork
 		outputNeurons = new Neuron[outputCount];
 		hiddenNeurons = new Neuron[numberHiddenLayers][hiddenCount];
 		inputs = NetworkInputs.values();
-		outputs = NetworkOutputs.values();
 	}
 	
 	/**
@@ -139,6 +137,10 @@ public class NNetwork
 		}
 	}
 	
+	/**
+	 * Update the input neurons so that they reflect the correct starting values.
+	 * @param ship Ship to update the neural network for.
+	 */
 	public void updateInputNeurons(AbstractShip ship)
 	{
 		for(int i = 0 ; i < inputNeurons.length; i++)
