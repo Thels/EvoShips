@@ -27,7 +27,8 @@ public class ArenaFrame extends JFrame
 		
 		remove(arenaPanel);
 		
-		add(new ScorePanel(game.getInitialShips()));
+		add(new ScorePanel(frameSize,game.getInitialShips()), BorderLayout.CENTER);
+		pack();
 		
 			
 	}

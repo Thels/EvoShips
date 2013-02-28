@@ -83,7 +83,6 @@ public class ArenaPanel extends JPanel implements Observer
 	
 	private void drawAsteroid(Asteroid asteroid, Graphics2D g2)
 	{
-		System.out.println("{Drawing");
 		int complexity = asteroid.getAsteroidComplexity();	
 		int[] xPoints = new int[complexity];
 		int[] yPoints = new int[complexity];

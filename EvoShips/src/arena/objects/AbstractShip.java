@@ -19,7 +19,7 @@ public abstract class AbstractShip extends AbstractObject
 	//How many bullets any ship can have on screen at any given time.
 	private final int MAX_BULLETS = 8;
 	//How many ticks a ship has to wait in between firing each shot.
-	private final int FIRE_DELAY = 35;
+	private final int FIRE_DELAY = 50;
 
 
 
