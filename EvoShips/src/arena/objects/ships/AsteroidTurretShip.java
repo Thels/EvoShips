@@ -22,7 +22,7 @@ public class AsteroidTurretShip extends AbstractShip
 		Asteroid nearestAst = shipWatcher.getNearestAsteroid(this);
 		if(nearestAst != null)
 		{
-			double angleToShip = shipWatcher.angleToNearestObject(this, nearestAst);
+			double angleToShip = shipWatcher.angleToObject(this, nearestAst);
 			if(angleToShip < 0)
 				right = true;
 			else

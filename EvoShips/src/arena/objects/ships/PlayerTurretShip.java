@@ -21,7 +21,7 @@ public class PlayerTurretShip extends AbstractShip
 		AbstractShip nearestShip = shipWatcher.getNearestShip(this);
 		if(nearestShip != null)
 		{
-			double angleToShip = shipWatcher.angleToNearestObject(this, nearestShip);
+			double angleToShip = shipWatcher.angleToObject(this, nearestShip);
 			if(angleToShip < 0)
 				right = true;
 			else
