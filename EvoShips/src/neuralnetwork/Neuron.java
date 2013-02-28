@@ -8,13 +8,16 @@ public class Neuron
 	 * For the current moment , neurons can have unlimited connections.
 	 */
 	private ENeuronTypes neuronType;
-	private double threshhold, weight, inputValue, neuronValue;
+	private double inputValue, neuronValue;
 	private HashMap<Neuron,Double> connectedWeightMap;
 	
-	public Neuron(ENeuronTypes neuronType, double threshhold) 
+	/**
+	 * Create a new neuron, with a given type.
+	 * @param neuronType Type of neuron to create, INPUT/HIDDEN/OUTPUT.
+	 */
+	public Neuron(ENeuronTypes neuronType) 
 	{
 		this.neuronType = neuronType;
-		this.threshhold = threshhold;
 		this.connectedWeightMap = new HashMap<Neuron,Double>();
 	}
 	

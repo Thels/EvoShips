@@ -37,7 +37,7 @@ public class NNetwork
 	{
 		for(int i = 0 ; i < outputNeurons.length; i++)
 		{
-			outputNeurons[i] = new Neuron(ENeuronTypes.OUTPUT, 0.5);
+			outputNeurons[i] = new Neuron(ENeuronTypes.OUTPUT);
 		}
 		
 		/*
@@ -49,13 +49,13 @@ public class NNetwork
 		{
 			for(int j = 0; j < hiddenLength; j++)
 			{
-				hiddenNeurons[i][j] = new Neuron(ENeuronTypes.HIDDEN, 0.5);
+				hiddenNeurons[i][j] = new Neuron(ENeuronTypes.HIDDEN);
 			}
 		}
 		
 		for(int i = 0; i < inputNeurons.length; i++)
 		{
-			inputNeurons[i] = new Neuron(ENeuronTypes.INPUT, 0.5);
+			inputNeurons[i] = new Neuron(ENeuronTypes.INPUT);
 		}
 		
 		//Since all of the neurons have been initialised, now I set up the connections between them.
