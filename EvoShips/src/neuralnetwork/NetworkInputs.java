@@ -56,4 +56,6 @@ public enum NetworkInputs
 			return ship.getShipsArenaWatcher().normalisedAngleNearestEnemyBullet(ship);
 		}
 	};
+	
+	public abstract double getInputValue(AbstractShip ship);
 }
