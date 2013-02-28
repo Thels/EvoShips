@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import arena.Arena;
 import arena.objects.AbstractShip;
+import arena.objects.ships.AsteroidHunter;
 import arena.objects.ships.AsteroidTurretShip;
 import arena.objects.ships.PlayerTurretShip;
 
@@ -14,8 +15,8 @@ public class UITest
 	{
 
 
-		AbstractShip test1 = new AsteroidTurretShip("Yarrrr");
-		AbstractShip test2 = new AsteroidTurretShip("Yaaarp");
+		AbstractShip test1 = new AsteroidHunter("Asteroid Hunter");
+		AbstractShip test2 = new AsteroidHunter("Yaaarp");
 
 		Arena testGame = new Arena(20, 50, 1);
 		testGame.addShipToArena(test1);

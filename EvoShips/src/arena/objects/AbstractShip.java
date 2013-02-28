@@ -79,6 +79,7 @@ public abstract class AbstractShip extends AbstractObject
 			turnLeft();
 		else if(right)
 			turnRight();
+	
 		if(forward)
 			moveForward();
 		else if(backward)
@@ -115,8 +116,10 @@ public abstract class AbstractShip extends AbstractObject
 		double newPosX = getObjectPosition().x + (SHIP_SPEED * Math.sin(Math.toRadians(getDirection())));
 		double newPosY = getObjectPosition().y + (SHIP_SPEED * Math.cos(Math.toRadians(getDirection())));
 		this.setNewObjectPosition(new Point.Double(newPosX, newPosY));
-		if(currentGame.getCollisionManager().isMoveValid(this))
+		if(!currentGame.getCollisionManager().isMoveValid(this))
 			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
+		
+		
 	}
 
 	/**
@@ -129,7 +132,7 @@ public abstract class AbstractShip extends AbstractObject
 		double newPosX = getObjectPosition().x - (SHIP_SPEED_REVERSE * Math.sin(Math.toRadians(getDirection())));
 		double newPosY = getObjectPosition().y - (SHIP_SPEED_REVERSE * Math.cos(Math.toRadians(getDirection())));
 		this.setNewObjectPosition(new Point.Double(newPosX, newPosY));
-		if(currentGame.getCollisionManager().isMoveValid(this))
+		if(!currentGame.getCollisionManager().isMoveValid(this))
 			this.setNewObjectPosition(new Point.Double(oldPosX, oldPosY));
 	}
 

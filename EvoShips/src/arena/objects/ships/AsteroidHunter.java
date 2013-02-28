@@ -16,6 +16,7 @@ public class AsteroidHunter extends AbstractShip
 	public void determineAction() 
 	{
 		resetActionBooleans();
+		
 		fire = true;
 		backward = true;
 		shipWatcher = getShipsArenaWatcher();
@@ -30,9 +31,6 @@ public class AsteroidHunter extends AbstractShip
 				left = true;
 			
 		}
-
-		
-	
 	}
 
 	@Override
