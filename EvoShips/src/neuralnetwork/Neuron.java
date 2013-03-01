@@ -61,7 +61,7 @@ public class Neuron
 	/**
 	 * Get the value contained at this neuron.
 	 * 
-	 * Requires fire() to be called before value is set.
+	 * Requires updateNeuron() to be called before value is set.
 	 * @return Value of the neuron.
 	 */
 	public double getNeuronValue()

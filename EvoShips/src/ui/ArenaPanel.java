@@ -42,6 +42,11 @@ public class ArenaPanel extends JPanel implements Observer
 		setPreferredSize(panelSize);
 		setMinimumSize(panelSize);
 		arenaObjects = new ArrayList<AbstractObject>();
+		
+		/*
+		 * A note on displayScale, for this project, the entire arena is run on an interal scaling of 1x1. This makes everything manageable, and when it comes
+		 * to drawing, I merely scale it by the screen size upon drawing. Makes everything simpler.
+		 */
 		displayScale = panelSize.width;
 	}
 
@@ -68,7 +73,11 @@ public class ArenaPanel extends JPanel implements Observer
 		}
 	}
 
-	
+	/**
+	 * Draw a bullet. Uses Graphics2D to allow Anti-Aliasing.
+	 * @param bullet Bullet to draw.
+	 * @param g2 Graphics2D in which to draw the bullet with.
+	 */
 	private void drawBullet(Bullet bulllet, Graphics2D g2)
 	{
 		g2.setColor(Color.WHITE);
@@ -79,8 +88,12 @@ public class ArenaPanel extends JPanel implements Observer
 				(int)(0.00625*displayScale));
 	}
 	
-	//TODO, lots ofjavadoc.
-	
+
+	/**
+	 * Draw an asteroid. Uses Graphics2D to allow Anti-Aliasing.
+	 * @param asteroid Asteroid to draw.
+	 * @param g2 Graphics2D in which to draw the asteroid with.
+	 */
 	private void drawAsteroid(Asteroid asteroid, Graphics2D g2)
 	{
 		int complexity = asteroid.getAsteroidComplexity();	
@@ -102,18 +115,20 @@ public class ArenaPanel extends JPanel implements Observer
 		
 	}
 
-
-
-
-	private void drawShip(AbstractShip obj, Graphics2D g2) 
+	/**
+	 * Draw a ship. Uses Graphics2D to allow Anti-Aliasing.
+	 * @param ship Ship to draw.
+	 * @param g2 Graphics2D in which to draw the ship with.
+	 */
+	private void drawShip(AbstractShip ship, Graphics2D g2) 
 	{
 		//First of all,work out the ships points.
 		int[] xPoints = new int[3];
 		int[] yPoints = new int[3];
 		
-		double x = obj.getObjectPosition().x;
-		double y = obj.getObjectPosition().y;
-		double dir = obj.getDirection();
+		double x = ship.getObjectPosition().x;
+		double y = ship.getObjectPosition().y;
+		double dir = ship.getDirection();
 		
 		xPoints[0] = (int)((x +  0.025 * Math.sin(Math.toRadians(dir)))*displayScale);
 		yPoints[0] = (int)((y +  0.025 * Math.cos(Math.toRadians(dir)))*displayScale);

@@ -79,7 +79,10 @@ public class Asteroid extends AbstractObject
 		return this.asteroidComplexity;
 	}
 	
-	//TODO docu
+	/**
+	 * Retrieve the theta value for this asteroid, which is the angle in between every point being drawn from the centre point.
+	 * @return Theta, being 360 / asteroidComplexity
+	 */
 	public double getTheta()
 	{
 		return theta;

@@ -149,6 +149,20 @@ public class NNetwork
 	}
 	
 	/**
+	 * Get the outputs of the networks output neurons.
+	 * @return Array storing all of the outputs.
+	 */
+	public double[] getNetworkOutputs()
+	{
+		double[] vals = new double[outputNeurons.length];
+		
+		for(int i = 0 ; i < outputNeurons.length; i++)
+			vals[i] = outputNeurons[i].getNeuronValue();
+		
+		return vals;
+	}
+	
+	/**
 	 * Update the input neurons so that they reflect the correct starting values.
 	 * @param ship Ship to update the neural network for.
 	 */
