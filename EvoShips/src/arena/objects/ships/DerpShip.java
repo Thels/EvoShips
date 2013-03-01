@@ -14,16 +14,16 @@ public class DerpShip extends AbstractShip
 {
 	private int tickCount;
 
-	public DerpShip(String shipName) 
+	public DerpShip() 
 	{
-		super(shipName);
+		super();
 		tickCount = 0;
 	}
 
 	@Override
 	public DerpShip cloneShip() 
 	{
-		DerpShip returnShip = new DerpShip(this.getShipName());
+		DerpShip returnShip = new DerpShip();
 		returnShip.setCloneOfShip(this);
 		return returnShip;
 	}
@@ -39,6 +39,12 @@ public class DerpShip extends AbstractShip
 		else
 			right = true;
 
+	}
+
+	@Override
+	public String getShipName()
+	{
+		return "Derp";
 	}
 
 }

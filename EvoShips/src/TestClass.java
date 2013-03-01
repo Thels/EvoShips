@@ -12,10 +12,10 @@ public class TestClass
 	public TestClass() 
 	{
 		int GAME_COUNT = 250;
-		DerpShip test1 = new DerpShip("DerpShip #1");
-		AsteroidHunter test2 = new AsteroidHunter("TestShip #2");
-		AsteroidHunter test3 = new AsteroidHunter("TestShip #3");
-		AsteroidHunter test4 = new AsteroidHunter("TestShip #4");
+		DerpShip test1 = new DerpShip();
+		AsteroidHunter test2 = new AsteroidHunter();
+		AsteroidHunter test3 = new AsteroidHunter();
+		AsteroidHunter test4 = new AsteroidHunter();
 		
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(test1);

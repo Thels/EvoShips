@@ -15,8 +15,8 @@ public class UITest
 	{
 
 
-		AbstractShip test1 = new AsteroidHunter("Asteroid Hunter");
-		AbstractShip test2 = new AsteroidHunter("Yaaarp");
+		AbstractShip test1 = new AsteroidHunter();
+		AbstractShip test2 = new AsteroidHunter();
 
 		Arena testGame = new Arena(20, 50, 1);
 		testGame.addShipToArena(test1);

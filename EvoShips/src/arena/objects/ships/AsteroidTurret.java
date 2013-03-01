@@ -7,9 +7,9 @@ import arena.objects.objects.Asteroid;
 public class AsteroidTurret extends AbstractShip 
 {
 	ArenaWatcher shipWatcher;
-	public AsteroidTurret(String shipName) 
+	public AsteroidTurret() 
 	{
-		super(shipName);
+		super();
 	}
 	
 	@Override
@@ -37,9 +37,15 @@ public class AsteroidTurret extends AbstractShip
 	@Override
 	public AsteroidTurret cloneShip() 
 	{
-		AsteroidTurret returnShip = new AsteroidTurret(this.getShipName());
+		AsteroidTurret returnShip = new AsteroidTurret();
 		returnShip.setCloneOfShip(this);
 		return returnShip;
+	}
+
+	@Override
+	public String getShipName() 
+	{
+		return "Asteroid Turret";
 	}
 
 

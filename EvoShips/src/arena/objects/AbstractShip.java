@@ -30,13 +30,11 @@ public abstract class AbstractShip extends AbstractObject
 	private AbstractShip cloneOfShip;
 
 	/**
-	 * Create a new ship, with a set given name.
-	 * @param shipName
+	 * Create a new ship.
 	 */
-	public AbstractShip(String shipName)
+	public AbstractShip()
 	{
 		super();
-		this.shipName = shipName;
 		resetActionBooleans();
 		ticksSinceLastShot = shipScore = 0;
 	}
@@ -54,12 +52,9 @@ public abstract class AbstractShip extends AbstractObject
 
 	/**
 	 * Get the name of this ship.
-	 * @return Name of the ship as given in the constructor.
+	 * @return Name of the ship.
 	 */
-	public String getShipName()
-	{
-		return this.shipName;
-	}
+	public abstract String getShipName();
 
 	@Override
 	public EObjects getObjectType() 

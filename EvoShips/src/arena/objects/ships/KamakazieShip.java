@@ -6,9 +6,9 @@ import arena.objects.AbstractShip;
 public class KamakazieShip extends AbstractShip 
 {
 	ArenaWatcher shipWatcher;
-	public KamakazieShip(String shipName) 
+	public KamakazieShip() 
 	{
-		super(shipName);
+		super();
 	}
 	
 	@Override
@@ -35,9 +35,15 @@ public class KamakazieShip extends AbstractShip
 	@Override
 	public KamakazieShip cloneShip() 
 	{
-		KamakazieShip returnShip = new KamakazieShip(this.getShipName());
+		KamakazieShip returnShip = new KamakazieShip();
 		returnShip.setCloneOfShip(this);
 		return returnShip;
+	}
+
+	@Override
+	public String getShipName() 
+	{
+		return "Derp Ship";
 	}
 
 
