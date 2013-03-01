@@ -172,6 +172,8 @@ public class NNetwork
 		{
 			inputNeurons[i].setInputValue(inputs[i].getInputValue(ship));
 		}
+		//Whenever we update input neurons, we want to update the neurons.
+		this.updateNetwork();
 	}
 
 }

@@ -1,5 +1,7 @@
 package arena.objects.ships;
 
+import java.util.List;
+
 import neuralnetwork.NNetwork;
 import neuralnetwork.NetworkInputs;
 import neuralnetwork.NetworkOutputs;
@@ -12,6 +14,7 @@ public class NNShip extends AbstractShip
 	private ArenaWatcher shipWatcher;
 	private NNetwork neuralNetwork;
 	private Chromosome shipChromosome;
+	private NetworkOutputs[] outputs;
 	
 	public NNShip(Chromosome chromosome) 
 	{
@@ -19,12 +22,18 @@ public class NNShip extends AbstractShip
 		shipChromosome = chromosome;
 		neuralNetwork = new NNetwork(chromosome, NetworkInputs.values().length, 4, 5, NetworkOutputs.values().length);
 		neuralNetwork.setupNeurons();
+		outputs = NetworkOutputs.values();
 	}
 	
 	@Override
 	public void determineAction() 
 	{
 		resetActionBooleans();
+		neuralNetwork.updateInputNeurons(this);
+		
+		double[] networkOutputs = neuralNetwork.getNetworkOutputs();
+		
+		for()
 
 
 	}
