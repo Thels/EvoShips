@@ -33,7 +33,7 @@ public class NNShip extends AbstractShip
 		
 		double[] networkOutputs = neuralNetwork.getNetworkOutputs();
 		
-		for()
+		
 
 
 	}

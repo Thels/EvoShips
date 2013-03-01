@@ -107,7 +107,7 @@ public class Arena extends Observable implements Runnable
 			if(this.countObservers()>0)
 			{
 				setChanged();
-				notifyObservers(arenaObjects);
+				notifyObservers(arenaObjects.clone());
 			}
 				
 			
@@ -228,6 +228,10 @@ public class Arena extends Observable implements Runnable
 		return collisionManager;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArenaWatcher getArenaWatcher()
 	{
 		return arenaWatcher;

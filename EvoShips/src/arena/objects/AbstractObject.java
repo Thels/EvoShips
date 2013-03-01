@@ -45,6 +45,8 @@ public abstract class AbstractObject
 		this.objectDir = 360 * r.nextDouble();
 		this.objectHealth = getObjectType().getBaseHealth();
 
+		
+		//Tidy up the program.
 		r = null;
 	}
 
@@ -129,7 +131,10 @@ public abstract class AbstractObject
 		this.objectPos = newPos;
 	}
 
-	
+	/**
+	 * Gets the objects collision model.
+	 * @return CollisionPolygon representing the object.
+	 */
 	public abstract CollisionPolygon getObjectCollisionModel();
 
 

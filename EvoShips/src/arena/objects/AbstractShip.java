@@ -21,9 +21,6 @@ public abstract class AbstractShip extends AbstractObject
 	//How many ticks a ship has to wait in between firing each shot.
 	private final int FIRE_DELAY = 50;
 
-
-
-	private String shipName;
 	protected boolean forward, backward, left, right, fire;
 	private int ticksSinceLastShot, shipScore;
 	private Arena currentGame;
@@ -45,6 +42,9 @@ public abstract class AbstractShip extends AbstractObject
 	 */
 	public abstract AbstractShip cloneShip();
 
+	/**
+	 * Reset all of the action booleans for this ship , a handy little helper method.
+	 */
 	protected void resetActionBooleans()
 	{
 		forward = backward = left = right = fire = false;

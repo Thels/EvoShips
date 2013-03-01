@@ -1,9 +1,6 @@
 package neuralnetwork;
 
 import genetic.Chromosome;
-
-import java.util.List;
-
 import arena.objects.AbstractShip;
 
 /**
