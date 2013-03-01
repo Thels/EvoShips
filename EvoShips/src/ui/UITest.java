@@ -6,6 +6,7 @@ import arena.Arena;
 import arena.objects.AbstractShip;
 import arena.objects.ships.AsteroidHunter;
 import arena.objects.ships.AsteroidTurret;
+import arena.objects.ships.KamakazieShip;
 import arena.objects.ships.Turret;
 
 public class UITest 
@@ -15,7 +16,7 @@ public class UITest
 	{
 
 
-		AbstractShip test1 = new AsteroidHunter();
+		AbstractShip test1 = new KamakazieShip();
 		AbstractShip test2 = new AsteroidHunter();
 
 		Arena testGame = new Arena(20, 50, 1);
@@ -24,6 +25,11 @@ public class UITest
 		
 		ArenaFrame frame = new ArenaFrame(testGame, new Dimension(650,650));
 		
+	}
+	
+	public static void main(String[] args)
+	{
+		new UITest();
 	}
 
 

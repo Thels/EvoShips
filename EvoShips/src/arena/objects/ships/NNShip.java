@@ -19,7 +19,6 @@ public class NNShip extends AbstractShip
 		shipChromosome = chromosome;
 		neuralNetwork = new NNetwork(chromosome, NetworkInputs.values().length, 4, 5, NetworkOutputs.values().length);
 		neuralNetwork.setupNeurons();
-		
 	}
 	
 	@Override

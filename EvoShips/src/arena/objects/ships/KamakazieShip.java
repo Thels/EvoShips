@@ -43,7 +43,7 @@ public class KamakazieShip extends AbstractShip
 	@Override
 	public String getShipName() 
 	{
-		return "Derp Ship";
+		return "Kamakazie Ship";
 	}
 
 
