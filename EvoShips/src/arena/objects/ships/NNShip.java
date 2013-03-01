@@ -7,13 +7,13 @@ import genetic.Chromosome;
 import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
 
-public class NNTank extends AbstractShip 
+public class NNShip extends AbstractShip 
 {
 	private ArenaWatcher shipWatcher;
 	private NNetwork neuralNetwork;
 	private Chromosome shipChromosome;
 	
-	public NNTank(Chromosome chromosome) 
+	public NNShip(Chromosome chromosome) 
 	{
 		super();
 		shipChromosome = chromosome;
@@ -31,9 +31,9 @@ public class NNTank extends AbstractShip
 	}
 
 	@Override
-	public NNTank cloneShip() 
+	public NNShip cloneShip() 
 	{
-		NNTank returnShip = new NNTank(shipChromosome);
+		NNShip returnShip = new NNShip(shipChromosome);
 		returnShip.setCloneOfShip(this);
 		return returnShip;
 	}
