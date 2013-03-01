@@ -18,6 +18,7 @@ public class NNTank extends AbstractShip
 		super();
 		shipChromosome = chromosome;
 		neuralNetwork = new NNetwork(chromosome, NetworkInputs.values().length, 4, 5, NetworkOutputs.values().length);
+		neuralNetwork.setupNeurons();
 		
 	}
 	
@@ -25,20 +26,7 @@ public class NNTank extends AbstractShip
 	public void determineAction() 
 	{
 		resetActionBooleans();
-	
-		shipWatcher = getShipsArenaWatcher();
-		
-		AbstractShip nearestShip = shipWatcher.getNearestShip(this);
-		if(nearestShip != null)
-		{
-			double angleToShip = shipWatcher.angleToObject(this, nearestShip);
-			if(angleToShip < 0)
-				right = true;
-			else
-				left = true;
-			
-			fire = true;
-		}
+
 
 	}
 
