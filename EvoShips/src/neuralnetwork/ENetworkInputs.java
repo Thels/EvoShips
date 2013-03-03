@@ -7,7 +7,7 @@ import arena.objects.AbstractShip;
  * @author Ross
  *
  */
-public enum NetworkInputs 
+public enum ENetworkInputs 
 {
 	ENEMY_DISTANCE 
 	{

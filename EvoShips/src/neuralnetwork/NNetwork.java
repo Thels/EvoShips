@@ -13,7 +13,7 @@ public class NNetwork
 
 	//Arrays the represent the neurons inside the neural network.
 	private Neuron inputNeurons[], outputNeurons[], hiddenNeurons[][];
-	private NetworkInputs[] inputs;
+	private ENetworkInputs[] inputs;
 	private Chromosome chromosome;
 	
 	/**
@@ -30,7 +30,7 @@ public class NNetwork
 		inputNeurons = new Neuron[inputCount];
 		outputNeurons = new Neuron[outputCount];
 		hiddenNeurons = new Neuron[numberHiddenLayers][hiddenCount];
-		inputs = NetworkInputs.values();
+		inputs = ENetworkInputs.values();
 	}
 	
 	/**

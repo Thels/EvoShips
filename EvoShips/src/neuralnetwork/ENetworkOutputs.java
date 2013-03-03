@@ -5,7 +5,7 @@ package neuralnetwork;
  * @author Ross
  *
  */
-public enum NetworkOutputs 
+public enum ENetworkOutputs 
 {
 	MOVE_FORWARD(0.05),
 	MOVE_BACKWARD(0.05),
@@ -19,7 +19,7 @@ public enum NetworkOutputs
 	 * Creates a new network output, with a given activation threshold.
 	 * @param activationThreshold Activation threshold for this output.
 	 */
-	NetworkOutputs(double activationThreshold)
+	ENetworkOutputs(double activationThreshold)
 	{
 		this.activationThreshold = activationThreshold;
 	}
