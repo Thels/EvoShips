@@ -33,9 +33,20 @@ public class NNShip extends AbstractShip
 		
 		double[] networkOutputs = neuralNetwork.getNetworkOutputs();
 		
+		/*
+		 * The order of the output neurons. For checking the values.
+		 * 	FORWARD(0.05),
+			MOVE_BACKWARD(0.05),
+			TURN_LEFT(0.05),
+			TURN_RIGHT(0.05),
+			FIRE(0.01);
+		 */
 		
-
-
+		forward = outputs[0].isActivated(networkOutputs[0]);
+		backward = outputs[1].isActivated(networkOutputs[1]);
+		left = outputs[2].isActivated(networkOutputs[2]);
+		right = outputs[3].isActivated(networkOutputs[3]);
+		fire = outputs[4].isActivated(networkOutputs[4]);
 	}
 
 	@Override
