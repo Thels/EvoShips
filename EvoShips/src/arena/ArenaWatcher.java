@@ -151,26 +151,26 @@ public class ArenaWatcher
 	/**
 	 * Get the distance to the nearest asteroid. If no asteroid can be found, then it returns Double.POSITIVE_INFINITY.
 	 * @param check Object to calculate nearest distance to.
-	 * @return Distance to the nearest asteroid, or INFINITY if no asteroid can be found.
+	 * @return Distance to the nearest asteroid, or 0 if no asteroid can be found.
 	 */
 	public double distanceToNearestAsteroid(AbstractObject check)
 	{
 		Asteroid nearestAsteroid = getNearestAsteroid(check);
 		if(nearestAsteroid == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return distanceBetweenPoints(check.getObjectPosition(),nearestAsteroid.getObjectPosition());
 	}
 
 	/**
 	 * Get the distance to the nearest enemy bullet. If no bullet can be found, then it returns Double.POSITIVE_INFINITY.
 	 * @param check Object to calculate nearest distance to.
-	 * @return Distance to the nearest bullet, or INFINITY if no bullet can be found.
+	 * @return Distance to the nearest bullet, or 0 if no bullet can be found.
 	 */
 	public double distanceToNearestBullet(AbstractObject check)
 	{
 		Bullet nearestBullet = getNearestEnemyBullet(check);
 		if(nearestBullet == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return distanceBetweenPoints(check.getObjectPosition(),nearestBullet.getObjectPosition());
 	}
 
@@ -254,39 +254,39 @@ public class ArenaWatcher
 	/**
 	 * Calculates the angle from a given object to the nearest enemy.
 	 * @param checkObject Object to calculate angle from.
-	 * @return Angle to the nearest enemy, positive infinity if no ship exists.
+	 * @return Angle to the nearest enemy, 0 if no ship exists.
 	 */
 	public double angleToNearestEnemy(AbstractObject checkObject)
 	{
 		AbstractShip nearestShip = getNearestShip(checkObject);
 		if(nearestShip == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return angleToObject(checkObject, nearestShip);
 	}
 
 	/**
 	 * Calculates the angle from a given object to the nearest asteroid.
 	 * @param checkObject Object to calculate angle from.
-	 * @return Angle to the nearest enemy, positive infinity if no asteroid exists.
+	 * @return Angle to the nearest enemy, 0 if no asteroid exists.
 	 */
 	public double angleToNearestAsteroid(AbstractObject checkObject)
 	{
 		Asteroid nearestAsteroid = getNearestAsteroid(checkObject);
 		if(nearestAsteroid == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return angleToObject(checkObject, nearestAsteroid);
 	}
 
 	/**
 	 * Calculates the angle from a given object to the nearest enemy bullet.
 	 * @param checkObject Object to calculate angle from.
-	 * @return Angle to the nearest enemy bullet, positive infinity if no bullet exists.
+	 * @return Angle to the nearest enemy bullet, 0 if no bullet exists.
 	 */
 	public double angleToNearestEnemyBullet(AbstractObject checkObject)
 	{
 		Bullet nearestBullet = getNearestEnemyBullet(checkObject);
 		if(nearestBullet == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return angleToObject(checkObject, nearestBullet);
 	}
 
