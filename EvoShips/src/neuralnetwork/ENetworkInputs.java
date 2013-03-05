@@ -13,7 +13,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedDistanceNearestEnemy(ship);
+			double temp = ship.getShipsArenaWatcher().normalisedDistanceNearestEnemy(ship);
+			return temp;
 		}
 	},
 
@@ -21,7 +22,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedAngleNearestEnemy(ship);
+			double temp = ship.getShipsArenaWatcher().normalisedAngleNearestEnemy(ship);
+			return temp;
 		}
 	},
 
@@ -29,7 +31,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedDistanceNearestAsteroid(ship);
+			double temp = ship.getShipsArenaWatcher().normalisedDistanceNearestAsteroid(ship);
+			return temp;
 		}
 	},
 
@@ -37,7 +40,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedAngleNearestAsteroid(ship);
+			double temp =  ship.getShipsArenaWatcher().normalisedAngleNearestAsteroid(ship);
+			return temp;
 		}
 	},
 
@@ -45,7 +49,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedDistanceNearestEnemyBullet(ship);
+			double temp = ship.getShipsArenaWatcher().normalisedDistanceNearestEnemyBullet(ship);
+			return temp;
 		}
 	},
 	
@@ -53,7 +58,8 @@ public enum ENetworkInputs
 	{
 		public double getInputValue(AbstractShip ship)
 		{
-			return ship.getShipsArenaWatcher().normalisedAngleNearestEnemyBullet(ship);
+			double temp = ship.getShipsArenaWatcher().normalisedAngleNearestEnemyBullet(ship);
+			return temp;
 		}
 	};
 	
