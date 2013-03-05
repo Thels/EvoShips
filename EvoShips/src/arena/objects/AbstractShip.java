@@ -236,6 +236,19 @@ public abstract class AbstractShip extends AbstractObject
 	}
 	
 	/**
+	 * Reset the score of this ship in the given arena. 
+	 * 
+	 * If the ship has a "cloneOfShip". Then it will reset that ships score instead. This is to track scores across multiple games easily.
+	 */
+	public void resetScore()
+	{
+		if(this.cloneOfShip == null)
+			this.shipScore = 0;
+		else
+			this.cloneOfShip.resetScore();
+	}
+	
+	/**
 	 * Set the ships cloneOf ship.
 	 * @param motherShip Ship to set as clone of ship.
 	 */
