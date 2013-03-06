@@ -85,7 +85,7 @@ public class Chromosome implements ISaveableChromosome
 			BufferedWriter out = new BufferedWriter(fstream);
 			for(Double d : this.getWeights())
 			{
-				out.write(String.valueOf(d));
+				out.write(String.valueOf(d)+",");
 				out.newLine();
 			}
 			//Close the output stream
