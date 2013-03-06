@@ -1,6 +1,6 @@
 package genetic;
 
-import io.FileCreator;
+import io.GeneticIO;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class GA
 	//The chance when breeding a ne chromosome that mutation will occur ( per allele ).
 	private final double MUTATION_CHANCE = 0.1;
 
-	private FileCreator fileHandler;
+	private GeneticIO geneticIOHandler;
 
 	public GA(ArrayList<AbstractShip> otherShips, int populationSize, int generations, int gamesPerGeneration, int maxAsteroids, int asteroidSpawnChance) 
 	{
@@ -47,9 +47,12 @@ public class GA
 
 		//Generate initial population.
 		population = generateInitialPopulation(populationSize);
-		
-		
-		fileHandler = new FileCreator();
+
+
+		geneticIOHandler = new GeneticIO();
+		geneticIOHandler.createChromosomeFolder();
+
+		geneticIOHandler.writeParametersToFile(otherShips, populationSize, generations, gamesPerGeneration, maxAsteroids, asteroidSpawnChance,MUTATION_CHANCE , CROSSOVER_CHANCE);
 
 		for(int i = 0 ; i < generations; i++)
 		{
@@ -113,7 +116,7 @@ public class GA
 
 		if(chromo != null)
 		{
-			fileHandler.saveChromosomeToFolder(chromo);
+			geneticIOHandler.saveChromosomeToFolder(chromo);
 		}
 
 	}
@@ -258,6 +261,6 @@ public class GA
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(test);
 
-		new GA(ships,200,200,100,20,1);
+		new GA(ships,100,200,80,20,1);
 	}
 }
