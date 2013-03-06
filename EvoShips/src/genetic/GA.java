@@ -258,8 +258,10 @@ public class GA
 	public static void main(String[] args)
 	{
 		AsteroidHunter test = new AsteroidHunter();
+		AsteroidHunter test1 = new AsteroidHunter();
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
-		ships.add(test);
+//		ships.add(test);
+//		ships.add(test1);
 
 		new GA(ships,100,200,80,20,1);
 	}
