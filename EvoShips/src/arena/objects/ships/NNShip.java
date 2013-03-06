@@ -1,11 +1,9 @@
 package arena.objects.ships;
 
-import java.util.List;
-
-import neuralnetwork.NNetwork;
+import genetic.Chromosome;
 import neuralnetwork.ENetworkInputs;
 import neuralnetwork.ENetworkOutputs;
-import genetic.Chromosome;
+import neuralnetwork.NNetwork;
 import arena.ArenaWatcher;
 import arena.objects.AbstractShip;
 
@@ -15,40 +13,45 @@ public class NNShip extends AbstractShip
 	private NNetwork neuralNetwork;
 	private Chromosome shipChromosome;
 	private ENetworkOutputs[] outputs;
-	
+
+	//These are merely place holder values, if time permitted, a UI would be added that would allow the changing of these values.
+	private final int HIDDEN_LAYER_COUNT = 4;
+	private final int NEURONS_PER_HIDDEN = 4;
+
 	public NNShip(Chromosome chromosome) 
 	{
 		super();
 		shipChromosome = chromosome;
-		neuralNetwork = new NNetwork(chromosome, ENetworkInputs.values().length, 4, 5, ENetworkOutputs.values().length);
+		neuralNetwork = new NNetwork(chromosome, ENetworkInputs.values().length, NEURONS_PER_HIDDEN, HIDDEN_LAYER_COUNT, ENetworkOutputs.values().length);
 		neuralNetwork.setupNeurons();
 		outputs = ENetworkOutputs.values();
 	}
-	
+
 	@Override
 	public void determineAction() 
 	{
+		//Reset all of the booleans.
 		resetActionBooleans();
+
+		//Update the input neurons.
 		neuralNetwork.updateInputNeurons(this);
-		
+
+		//Get the output from the updated neural network.
 		double[] networkOutputs = neuralNetwork.getNetworkOutputs();
+
+		forward = outputs[0].isActivatedPositiveBound(networkOutputs[0]);
+
+		if(!forward)
+			backward = outputs[0].isActivatedNegativeBound(networkOutputs[0]);
+
 		
-		/*
-		 * The order of the output neurons. For checking the values.
-		 * 
-		 * Copy/pasted from NetworkOutputs enum.
-		 * 	FORWARD(0.05),
-			MOVE_BACKWARD(0.05),
-			TURN_LEFT(0.05),
-			TURN_RIGHT(0.05),
-			FIRE(0.01);
-		 */
-		
-		forward = outputs[0].isActivated(networkOutputs[0]);
-		backward = outputs[1].isActivated(networkOutputs[1]);
-		left = outputs[2].isActivated(networkOutputs[2]);
-		right = outputs[3].isActivated(networkOutputs[3]);
-		fire = outputs[4].isActivated(networkOutputs[4]);
+		left = outputs[1].isActivatedPositiveBound(networkOutputs[1]);
+
+		if(!left)
+			right = outputs[1].isActivatedNegativeBound(networkOutputs[1]);
+
+		if(outputs[2].isActivatedPositiveBound(networkOutputs[2]))
+			fire = true;
 	}
 
 	@Override
