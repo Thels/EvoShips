@@ -1,6 +1,7 @@
 package genetic;
 
-import genetic.io.ISaveableChromosome;
+
+import io.ISaveableChromosome;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

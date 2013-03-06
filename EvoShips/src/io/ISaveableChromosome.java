@@ -1,4 +1,4 @@
-package genetic.io;
+package io;
 
 import java.io.IOException;
 
