@@ -7,11 +7,11 @@ package neuralnetwork;
  */
 public enum ENetworkOutputs 
 {
-	MOVE_FORWARD(0.05),
-	MOVE_BACKWARD(0.05),
-	TURN_LEFT(0.05),
-	TURN_RIGHT(0.05),
-	FIRE(0.01);
+	MOVE(0),
+	//MOVE_BACKWARD(0.25),
+	TURN(0),
+//	TURN_RIGHT(0.3),
+	FIRE(0.05);
 	
 	private double activationThreshold;
 	
