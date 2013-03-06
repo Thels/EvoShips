@@ -1,5 +1,7 @@
 package genetic;
 
+import io.FileCreator;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -25,25 +27,19 @@ public class GA
 
 	private int maxAsteroids, asteroidSpawnChance;
 
+	//Should elitism be used in this GA. Elitism is the copying of one or a few of some of the best chromosomes in each generation.
 	private final boolean ELITISM = true;
 	private final int ELITISM_COPY_COUNT = 10;
 
+	//The chance when breeding a new chromosome that crossover will occur.
 	private final double CROSSOVER_CHANCE = 0.3;
+	//The chance when breeding a ne chromosome that mutation will occur ( per allele ).
 	private final double MUTATION_CHANCE = 0.1;
 
-	private String folderPath;
+	private FileCreator fileHandler;
 
 	public GA(ArrayList<AbstractShip> otherShips, int populationSize, int generations, int gamesPerGeneration, int maxAsteroids, int asteroidSpawnChance) 
 	{
-
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-		Date date = new Date();
-
-		this.folderPath = "chromosomes/"+dateFormat.format(date);
-
-		File newDir = new File(folderPath);
-		newDir.mkdirs();
-
 		this.maxAsteroids = maxAsteroids;
 		this.asteroidSpawnChance = asteroidSpawnChance;
 
@@ -51,6 +47,9 @@ public class GA
 
 		//Generate initial population.
 		population = generateInitialPopulation(populationSize);
+		
+		
+		fileHandler = new FileCreator();
 
 		for(int i = 0 ; i < generations; i++)
 		{
@@ -114,14 +113,7 @@ public class GA
 
 		if(chromo != null)
 		{
-			try 
-			{
-				chromo.saveToFile(folderPath);
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
+			fileHandler.saveChromosomeToFolder(chromo);
 		}
 
 	}
@@ -181,7 +173,7 @@ public class GA
 		for(Chromosome c : population)
 		{
 			totalSoFar += c.getChromosomeScore();
-			if(totalSoFar > choice)
+			if(totalSoFar >= choice)
 				return c;
 		}
 
@@ -266,6 +258,6 @@ public class GA
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(test);
 
-		new GA(ships,100,20,20,20,1);
+		new GA(ships,200,200,100,20,1);
 	}
 }
