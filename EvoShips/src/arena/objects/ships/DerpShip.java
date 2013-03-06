@@ -38,6 +38,8 @@ public class DerpShip extends AbstractShip
 		}
 		else
 			right = true;
+		
+		fire = true;
 
 	}
 
