@@ -77,14 +77,17 @@ public class Chromosome implements ISaveableChromosome
 	}
 
 	@Override
-	public void saveToFile() throws IOException 
+	public void saveToFile(String folderName) throws IOException 
 	{
 		try 
 		{
-			FileWriter fstream = new FileWriter(this.getChromosomeScore()+"-"+this.toString());
+			FileWriter fstream = new FileWriter(folderName+"\\"+this.getChromosomeScore()+"-"+this.toString());
 			BufferedWriter out = new BufferedWriter(fstream);
 			for(Double d : this.getWeights())
+			{
 				out.write(String.valueOf(d));
+				out.newLine();
+			}
 			//Close the output stream
 			out.close();
 
