@@ -1,6 +1,11 @@
 package genetic;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import neuralnetwork.ENetworkInputs;
@@ -22,12 +27,23 @@ public class GA
 
 	private final boolean ELITISM = true;
 	private final int ELITISM_COPY_COUNT = 10;
-	
+
 	private final double CROSSOVER_CHANCE = 0.3;
 	private final double MUTATION_CHANCE = 0.1;
 
+	private String folderPath;
+
 	public GA(ArrayList<AbstractShip> otherShips, int populationSize, int generations, int gamesPerGeneration, int maxAsteroids, int asteroidSpawnChance) 
 	{
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+		Date date = new Date();
+
+		this.folderPath = "chromosomes/"+dateFormat.format(date);
+
+		File newDir = new File(folderPath);
+		newDir.mkdirs();
+
 		this.maxAsteroids = maxAsteroids;
 		this.asteroidSpawnChance = asteroidSpawnChance;
 
@@ -41,6 +57,9 @@ public class GA
 			runGeneration(otherShips,population, gamesPerGeneration);
 			population = calculateNextPopulation(population);
 		}
+
+
+
 
 
 
@@ -64,7 +83,7 @@ public class GA
 			batchShips.add(nnShip);
 			arena = new BatchArena(batchShips, gamesPerGeneration, maxAsteroids, asteroidSpawnChance);
 			arena.startBatch();
-			
+
 			//Not sure what else to do here, it's a busy wait.
 			while(arena.isBatchRunning())
 			{}
@@ -76,21 +95,34 @@ public class GA
 
 		resetShipScores(batchShips);
 
-		printHighestScore(population);
-
-
+		saveHighestScore(population);
 
 	}
 
-	private void printHighestScore(ArrayList<Chromosome> population2) 
+	private void saveHighestScore(ArrayList<Chromosome> population2) 
 	{
 		int highest = 0;
+		Chromosome chromo = null;
 		for(Chromosome c : population)
+		{
 			if(c.getChromosomeScore() > highest)
+			{
 				highest = c.getChromosomeScore();
+				chromo = c;
+			}
+		}
 
-		System.out.println("Highest for this generation : "+highest);
-
+		if(chromo != null)
+		{
+			try 
+			{
+				chromo.saveToFile(folderPath);
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -234,6 +266,6 @@ public class GA
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(test);
 
-		new GA(ships,100,500,100,20,1);
+		new GA(ships,100,20,20,20,1);
 	}
 }
