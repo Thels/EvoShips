@@ -37,6 +37,8 @@ public class Arena extends Observable implements Runnable
 	
 	//initialShips holds a reference to the ships ( non cloned, for scoring purposes. )
 	private ArrayList<AbstractShip> arenaShips, initialShips;
+	
+	private boolean hasLastAliveBonusBeenGranted;
 
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
@@ -70,6 +72,7 @@ public class Arena extends Observable implements Runnable
 		this.arenaObjects = new ArrayList<AbstractObject>();
 		this.arenaShips = new ArrayList<AbstractShip>();
 		this.initialShips = new ArrayList<AbstractShip>();
+		this.hasLastAliveBonusBeenGranted = false;
 	}
 
 	@Override
@@ -199,10 +202,11 @@ public class Arena extends Observable implements Runnable
 			return false;
 		
 		//If one ships is alive at the end of the arena fight, then award that ship some points for winning. Hooray, points.
-		else if(aliveCount == 1)
+		else if(aliveCount == 1 && !hasLastAliveBonusBeenGranted)
 		{
 			aliveShip.incrementScore(50);
-			return false;
+			hasLastAliveBonusBeenGranted = true;
+			return true;
 		}
 		else return true;
 			
