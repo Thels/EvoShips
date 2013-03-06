@@ -2,16 +2,16 @@ package neuralnetwork;
 
 /**
  * Enum that holds all of the possible output for the evoships neural network.
+ * 
+ * Original version used to have 5 outputs , one for each movement and one for fire. But this was found to be too complicated for the simple NNetwork.
  * @author Ross
  *
  */
 public enum ENetworkOutputs 
 {
-	MOVE(0),
-	//MOVE_BACKWARD(0.25),
-	TURN(0),
-//	TURN_RIGHT(0.3),
-	FIRE(0.05);
+	MOVE(0.05),
+	TURN(0.03),
+	FIRE(0.005);
 	
 	private double activationThreshold;
 	
@@ -25,12 +25,22 @@ public enum ENetworkOutputs
 	}
 	
 	/**
-	 * Check to see if a given value activates the given output.
+	 * Check to see if a given value activates the given output in the positive bound, is value > +activationThreshold.
 	 * @param value Value to check against the activation threshold.
-	 * @return Whether the value is greater than the activation threshold.
+	 * @return Whether the value is greater than the POSITIVE activation threshold.
 	 */
-	public boolean isActivated(double value)
+	public boolean isActivatedPositiveBound(double value)
 	{
 		return value > this.activationThreshold;
+	}
+	
+	/**
+	 * Check to see if a given value activates the given output in the negative bound, is value < -activationThreshold.
+	 * @param value Value to check against the activation threshold.
+	 * @return Whether the value is less than the negative activation threshold.
+	 */
+	public boolean isActivatedNegativeBound(double value)
+	{
+		return value < -this.activationThreshold;
 	}
 }
