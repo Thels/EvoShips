@@ -73,7 +73,7 @@ public class BatchArena
 	 */
 	public boolean isBatchRunning()
 	{
-		return threadPool.isTerminated();
+		return !threadPool.isTerminated();
 	}
 
 }
