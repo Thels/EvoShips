@@ -17,7 +17,7 @@ import arena.objects.AbstractShip;
  * @author Ross
  *
  */
-public class BatchArena 
+public class BatchArena
 {
 
 	private final int MAX_THREADS = 4;
