@@ -9,14 +9,13 @@ import arena.objects.AbstractShip;
 
 public class NNShip extends AbstractShip 
 {
-	private ArenaWatcher shipWatcher;
 	private NNetwork neuralNetwork;
 	private Chromosome shipChromosome;
 	private ENetworkOutputs[] outputs;
 
 	//These are merely place holder values, if time permitted, a UI would be added that would allow the changing of these values.
 	private final int HIDDEN_LAYER_COUNT = 4;
-	private final int NEURONS_PER_HIDDEN = 4;
+	private final int NEURONS_PER_HIDDEN = 5;
 
 	public NNShip(Chromosome chromosome) 
 	{
