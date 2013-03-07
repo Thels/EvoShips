@@ -18,10 +18,17 @@ public class AsteroidHunter extends AbstractShip
 		resetActionBooleans();
 		
 		fire = true;
-		backward = true;
 		shipWatcher = getShipsArenaWatcher();
 		
 		Asteroid nearestAst = shipWatcher.getNearestAsteroid(this);
+		
+		double distanceToNearestAsteroid = shipWatcher.distanceToNearestAsteroid(this);
+		
+		if(distanceToNearestAsteroid > 0.3)
+			forward = true;
+		else
+			backward = true;
+		
 		if(nearestAst != null)
 		{
 			double angleToShip = shipWatcher.angleToObject(this, nearestAst);
