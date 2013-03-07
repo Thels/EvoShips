@@ -34,11 +34,10 @@ public class Arena extends Observable implements Runnable
 
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
 	private final int TICKS_PER_ALIVE_SCORE = 500;
-	
+
 	//initialShips holds a reference to the ships ( non cloned, for scoring purposes. )
 	private ArrayList<AbstractShip> arenaShips, initialShips;
-	
-	private boolean hasLastAliveBonusBeenGranted;
+
 
 	/*
 	 * GameObjects is a list holding all of the objects in the current arena
@@ -72,7 +71,6 @@ public class Arena extends Observable implements Runnable
 		this.arenaObjects = new ArrayList<AbstractObject>();
 		this.arenaShips = new ArrayList<AbstractShip>();
 		this.initialShips = new ArrayList<AbstractShip>();
-		this.hasLastAliveBonusBeenGranted = false;
 	}
 
 	@Override
@@ -81,7 +79,7 @@ public class Arena extends Observable implements Runnable
 		Random r = new Random();
 		gameRunning = true;
 		int currentAsteroidCount;
-		
+
 		//Set to max value to spawn one at start.
 		int ticksSinceLastAsteroidSpawn = ASTEROID_SPAWN_DELAY;
 
@@ -102,7 +100,7 @@ public class Arena extends Observable implements Runnable
 
 			//Here are variable clears.
 			currentAsteroidCount = 0;
-			
+
 			//Ensure arena watcher is using most updated object list.
 			arenaWatcher.setObjects(arenaObjects);
 
@@ -112,14 +110,14 @@ public class Arena extends Observable implements Runnable
 				setChanged();
 				notifyObservers(arenaObjects.clone());
 			}
-				
-			
-			
-			
-			
+
+
+
+
+
 			//In order for each tick to be fair, the list of object is shuffled here.
 			Collections.shuffle(arenaObjects);
-			
+
 			collisionManager.checkForCollisions();
 
 			//Go through each object, find all of the ships, useful to have a list of them.
@@ -159,7 +157,8 @@ public class Arena extends Observable implements Runnable
 			if(this.arenaTickCount % TICKS_PER_ALIVE_SCORE == 0)
 			{
 				for(AbstractShip ship : currentShips)
-					ship.incrementScore(1);
+					if(ship.isObjectAlive())
+						ship.incrementScore(1);
 			}
 
 			gameRunning = updateGameStatus(arenaShips);
@@ -184,10 +183,10 @@ public class Arena extends Observable implements Runnable
 	{
 		if(this.arenaTickCount == MAX_GAME_TICKS)
 			return false;
-		
+
 		int aliveCount = 0;
 		AbstractShip aliveShip = null;
-		
+
 		for(AbstractShip ship : gameShips)
 		{
 			if(ship.isObjectAlive())
@@ -196,20 +195,19 @@ public class Arena extends Observable implements Runnable
 				aliveShip = ship;
 			}
 		}
-		
+
 		//Clause to see if two ships have managed to die on exactly the same tick ( unlikely ).
 		if(aliveCount == 0)
 			return false;
-		
+
 		//If one ships is alive at the end of the arena fight, then award that ship some points for winning. Hooray, points.
-		else if(aliveCount == 1 && !hasLastAliveBonusBeenGranted)
+		else if(aliveCount == 1)
 		{
-			aliveShip.incrementScore(50);
-			hasLastAliveBonusBeenGranted = true;
-			return true;
+			aliveShip.incrementScore(20);
+			return false;
 		}
 		else return true;
-			
+
 	}
 
 
@@ -231,7 +229,7 @@ public class Arena extends Observable implements Runnable
 	{
 		return collisionManager;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -249,7 +247,7 @@ public class Arena extends Observable implements Runnable
 	{
 		if(gameRunning)
 			return;
-		
+
 		initialShips.add(shipToAdd);
 
 		AbstractShip copy = shipToAdd.cloneShip();
@@ -271,7 +269,7 @@ public class Arena extends Observable implements Runnable
 		else
 			arenaObjects.add(object);
 	}
-	
+
 	/**
 	 * Retrieve whether or not the game is currently running, useful for UI elements.
 	 * @return Whether the game logic loops is still running.
@@ -280,7 +278,7 @@ public class Arena extends Observable implements Runnable
 	{
 		return this.gameRunning;
 	}
-	
+
 	/**
 	 * Get the initial ships that were used to create this arena, the non-cloned ones.
 	 * @return List generated when adding ships to the arena.
