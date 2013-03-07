@@ -41,6 +41,6 @@ public enum ENetworkOutputs
 	 */
 	public boolean isActivatedNegativeBound(double value)
 	{
-		return value < -this.activationThreshold;
+		return value < (this.activationThreshold*-1);
 	}
 }
