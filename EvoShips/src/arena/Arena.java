@@ -231,8 +231,8 @@ public class Arena extends Observable implements Runnable
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Get the arena watcher currently tied to this arena.
+	 * @return Arena watcher created at arena run time.
 	 */
 	public ArenaWatcher getArenaWatcher()
 	{
