@@ -72,11 +72,11 @@ public abstract class AbstractShip extends AbstractObject
 			fire();
 		if(left)
 			turnLeft();
-		else if(right)
+		if(right)
 			turnRight();
 		if(forward)
 			moveForward();
-		else if(backward)
+		if(backward)
 			moveBackward();
 	}
 
