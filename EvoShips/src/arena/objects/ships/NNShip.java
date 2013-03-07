@@ -40,18 +40,13 @@ public class NNShip extends AbstractShip
 		double[] networkOutputs = neuralNetwork.getNetworkOutputs();
 
 		forward = outputs[0].isActivatedPositiveBound(networkOutputs[0]);
-
-		if(!forward)
-			backward = outputs[0].isActivatedNegativeBound(networkOutputs[0]);
+		backward = outputs[0].isActivatedNegativeBound(networkOutputs[0]);
 
 		
 		left = outputs[1].isActivatedPositiveBound(networkOutputs[1]);
+		right = outputs[1].isActivatedNegativeBound(networkOutputs[1]);
 
-		if(!left)
-			right = outputs[1].isActivatedNegativeBound(networkOutputs[1]);
-
-		if(outputs[2].isActivatedPositiveBound(networkOutputs[2]))
-			fire = true;
+		fire = outputs[2].isActivatedPositiveBound(networkOutputs[2]);
 	}
 
 	@Override
@@ -65,7 +60,7 @@ public class NNShip extends AbstractShip
 	@Override
 	public String getShipName() 
 	{
-		return "NNetwork Tank";
+		return "NNetwork Ship";
 	}
 
 
