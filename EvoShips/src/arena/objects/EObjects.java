@@ -9,7 +9,7 @@ package arena.objects;
  */
 public enum EObjects 
 {
-	OBJ_SHIP(10),
+	OBJ_SHIP(20),
 	OBJ_ASTEROID(3),
 	OBJ_BULLET(1);
 	
