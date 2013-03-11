@@ -33,7 +33,7 @@ public class Arena extends Observable implements Runnable
 	private final int ASTEROID_SPAWN_DELAY = 200;
 
 	//This variable represents how many ticks have to occur before ships are given their 1 points for surviving.
-	private final int TICKS_PER_ALIVE_SCORE = 500;
+	private final int TICKS_PER_ALIVE_SCORE = 400;
 
 	//initialShips holds a reference to the ships ( non cloned, for scoring purposes. )
 	private ArrayList<AbstractShip> arenaShips, initialShips;
