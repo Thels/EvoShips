@@ -17,6 +17,10 @@ public class GeneticIO
 {
 	private String folderPath;
 
+	/**
+	 * Creates the folder that all chromosomes will be saved in.
+	 * @return True if folder created successfully.
+	 */
 	public boolean createChromosomeFolder()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
@@ -30,6 +34,10 @@ public class GeneticIO
 		return newDir.mkdirs();
 	}
 
+	/**
+	 * Saves a given chromosome to the folder that this GeneticIO represents.
+	 * @param chromoToSave Chromosome to save.
+	 */
 	public void saveChromosomeToFolder(Chromosome chromoToSave)
 	{
 		try 
@@ -42,12 +50,23 @@ public class GeneticIO
 		}
 	}
 
+	/**
+	 * Write the paramaters of this GA to a file in the folder, so that you can easily check the variables later on.
+	 * @param ships Other ships taking part with the NNShip.
+	 * @param popSize Size of the population.
+	 * @param generationCount Number of generations being ran.
+	 * @param gamesPerGeneration Number of games per generation.
+	 * @param maxAsteroids Max number of asteroids per arena created.
+	 * @param asteroidSpawnChance Asteroid spawn chance ( 0-100 ).
+	 * @param mutationChance Chance that an allele will be mutated.
+	 * @param crossoverChance Chance that a chromosome will incur crossover.
+	 */
 	public void writeParametersToFile(ArrayList<AbstractShip> ships,int popSize, int generationCount, 
 			int gamesPerGeneration, int maxAsteroids, int asteroidSpawnChance, double mutationChance, double crossoverChance)
 	{
 		try 
 		{
-			FileWriter fstream = new FileWriter(folderPath+"\\"+"GA-PARMS.txt");
+			FileWriter fstream = new FileWriter(folderPath+"\\"+"GA-PARAMS.txt");
 			BufferedWriter out = new BufferedWriter(fstream);
 
 			out.write("Other Ships Taking Part");
