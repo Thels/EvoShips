@@ -61,7 +61,44 @@ public enum ENetworkInputs
 			double temp = ship.getShipsArenaWatcher().normalisedAngleNearestEnemyBullet(ship);
 			return temp;
 		}
+	},
+	
+	LEFT_WALL_DISTANCE
+	{
+		public double getInputValue(AbstractShip ship)
+		{
+			double temp = ship.getObjectPosition().x;
+			return temp;
+		}
+	},
+	
+	RIGHT_WALL_DISTANCE
+	{
+		public double getInputValue(AbstractShip ship)
+		{
+			double temp = 1 - ship.getObjectPosition().x;
+			return temp;
+		}
+	},
+	
+	TOP_WALL_DISTANCE
+	{
+		public double getInputValue(AbstractShip ship)
+		{
+			double temp = ship.getObjectPosition().y;
+			return temp;
+		}
+	},
+	
+	BOTTOM_WALL_DISTANCE
+	{
+		public double getInputValue(AbstractShip ship)
+		{
+			double temp = 1 - ship.getObjectPosition().y;
+			return temp;
+		}
 	};
+	
 	
 	public abstract double getInputValue(AbstractShip ship);
 }
