@@ -199,13 +199,7 @@ public class Arena extends Observable implements Runnable
 		//Clause to see if two ships have managed to die on exactly the same tick ( unlikely ).
 		if(aliveCount == 0)
 			return false;
-
-		//If one ships is alive at the end of the arena fight, then award that ship some points for winning. Hooray, points.
-		else if(aliveCount == 1)
-		{
-			aliveShip.incrementScore(20);
-			return false;
-		}
+		
 		else return true;
 
 	}
