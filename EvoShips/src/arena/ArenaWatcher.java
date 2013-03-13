@@ -136,15 +136,15 @@ public class ArenaWatcher
 	}
 
 	/**
-	 * Get the distance to the nearest enemy ship. If no enemy ship can be found, then it returns Double.POSITIVE_INFINITY.
+	 * Get the distance to the nearest enemy ship. If no enemy ship can be found, then it returns 0.
 	 * @param check Object to calculate nearest distance to.
-	 * @return Distance to the nearest enemy ship, or INFINITY if no ship can be found.
+	 * @return Distance to the nearest enemy ship, or 0 if no ship can be found.
 	 */
 	public double distanceToNearestEnemy(AbstractObject check) 
 	{
 		AbstractShip nearestEnemy = getNearestShip(check);
 		if(nearestEnemy == null)
-			return Double.POSITIVE_INFINITY;
+			return 0;
 		return distanceBetweenPoints(check.getObjectPosition(), nearestEnemy.getObjectPosition());
 	}
 
