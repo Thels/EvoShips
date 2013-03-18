@@ -16,6 +16,7 @@ import arena.objects.AbstractShip;
 public class GeneticIO 
 {
 	private String folderPath;
+	private BufferedWriter fitnessWriter;
 
 	/**
 	 * Creates the folder that all chromosomes will be saved in.
@@ -106,6 +107,66 @@ public class GeneticIO
 		{
 			System.err.println("Error when saving Chromosome : "+this.toString());
 			System.err.println("Error message : " + e.getMessage());
+		}
+	}
+	
+	public void createFitnessFile()
+	{
+		try 
+		{
+			FileWriter fstream = new FileWriter(folderPath+"\\"+"GA-FITNESS.txt");
+			fitnessWriter = new BufferedWriter(fstream);
+		}
+		catch (IOException e)
+		{
+			System.err.println("Error when creating fitness file. : "+this.toString());
+			System.err.println("Error message : " + e.getMessage());
+		}
+	}
+	
+	public void addToFitnessFile(int generationNumber, int gamesPlayed, ArrayList<Chromosome> chromosomes)
+	{
+		int totalScore = 0;
+		int highestScore = 0;
+		
+		for(Chromosome c : chromosomes)
+		{
+			int score = c.getChromosomeScore();
+			if(score > highestScore)
+				highestScore = score;
+			totalScore += score;
+		}
+		
+		double averageScore = totalScore / chromosomes.size();
+		
+		try 
+		{
+			fitnessWriter.write("Generation : "+generationNumber);
+			fitnessWriter.newLine();
+			fitnessWriter.write("Average Score : " +String.valueOf(averageScore));
+			fitnessWriter.newLine();
+			fitnessWriter.write("Best Score : "+highestScore);
+			fitnessWriter.newLine();
+			fitnessWriter.newLine();
+			fitnessWriter.flush();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+			
+	}
+	
+	public void closeFitnessWriter()
+	{
+		try 
+		{
+			fitnessWriter.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
 		}
 	}
 

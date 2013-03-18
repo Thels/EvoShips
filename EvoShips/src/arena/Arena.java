@@ -158,7 +158,7 @@ public class Arena extends Observable implements Runnable
 			{
 				for(AbstractShip ship : currentShips)
 					if(ship.isObjectAlive())
-						ship.incrementScore(1);
+						ship.incrementScore(EScoring.SURVIVING_BONUS.getScore());
 			}
 
 			gameRunning = updateGameStatus(arenaShips);

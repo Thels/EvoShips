@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import arena.Arena;
+import arena.EScoring;
 import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 import arena.objects.EObjects;
@@ -129,10 +130,10 @@ public class CollisionManager
 			case BULLET_COL:
 			{
 				if(c.getCollidingWithObject().getObjectType() == EObjects.OBJ_SHIP)
-					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(5);
+					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(EScoring.SHIP_HIT.getScore());
 
 				else if(c.getCollidingWithObject().getObjectType() == EObjects.OBJ_ASTEROID)
-					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(1);
+					((AbstractShip)((Bullet)c.getObject()).getBulletCreator()).incrementScore(EScoring.ASTEROID_HIT.getScore());
 
 
 				c.getCollidingWithObject().applyDamage(1);

@@ -15,6 +15,7 @@ public class NNetwork
 	private Neuron inputNeurons[], outputNeurons[], hiddenNeurons[][];
 	private ENetworkInputs[] inputs;
 	private Chromosome chromosome;
+	private int hiddenLayers, neuronsPerHiddenLayers;
 	
 	/**
 	 * Create a new neural network, with the given amount of input / hidden / output layers.
@@ -31,6 +32,8 @@ public class NNetwork
 		outputNeurons = new Neuron[outputCount];
 		hiddenNeurons = new Neuron[numberHiddenLayers][hiddenCount];
 		inputs = ENetworkInputs.values();
+		hiddenLayers = numberHiddenLayers;
+		neuronsPerHiddenLayers = hiddenCount;
 	}
 	
 	/**
@@ -48,14 +51,10 @@ public class NNetwork
 			outputNeurons[i] = new Neuron(ENeuronTypes.OUTPUT);
 		}
 		
-		/*
-		 * In order to add in the hidden neurons, I add them from right to left.
-		 */
-		int hiddenLength = hiddenNeurons[0].length;
 		
-		for(int i = hiddenNeurons.length - 1; i >= 0; i--)
+		for(int i = hiddenLayers - 1; i >= 0; i--)
 		{
-			for(int j = 0; j < hiddenLength; j++)
+			for(int j = 0; j < neuronsPerHiddenLayers; j++)
 			{
 				hiddenNeurons[i][j] = new Neuron(ENeuronTypes.HIDDEN);
 			}
@@ -67,7 +66,7 @@ public class NNetwork
 		}
 		
 		//Since all of the neurons have been initialised, now I set up the connections between them.
-		setupNeuronConnections(hiddenLength,hiddenNeurons.length);
+		setupNeuronConnections(neuronsPerHiddenLayers,hiddenLayers);
 	}
 	
 	/**

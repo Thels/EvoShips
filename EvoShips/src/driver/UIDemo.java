@@ -22,9 +22,9 @@ public class UIDemo
 		Arena demoArena = new Arena(20,1,5);
 		
 		demoArena.addShipToArena(asteroidHunter);
-		demoArena.addShipToArena(kamakazieShip);
-		demoArena.addShipToArena(derpShip);
-		demoArena.addShipToArena(turretShip);
+		//demoArena.addShipToArena(kamakazieShip);
+		//demoArena.addShipToArena(derpShip);
+		//demoArena.addShipToArena(turretShip);
 		
 		ArenaFrame frame = new ArenaFrame(demoArena, new Dimension(500,500));
 	}

@@ -42,7 +42,12 @@ public class Chromosome implements ISaveableChromosome
 		for(int i = 0; i < numberWeights; i++)
 		{
 			double val = ran.nextDouble();
-			weights[i] = val;
+			
+			//Chance that the weight will be negative.
+			if(ran.nextDouble() > 0.5)
+				weights[i] = val;
+			else
+				weights[i] = -val;
 		}
 	}
 

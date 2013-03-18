@@ -32,7 +32,7 @@ public class DerpShip extends AbstractShip
 	public void determineAction() 
 	{
 		tickCount++;
-		if(tickCount > 500)
+		if(tickCount > 5000)
 		{
 			left = true;
 		}

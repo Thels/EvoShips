@@ -22,21 +22,22 @@ public class GA
 	private ArrayList<Chromosome> population;
 
 	//These are merely place holder values, if time permitted, a UI would be added that would allow the changing of these values.
-	private final int HIDDEN_LAYER_COUNT = 4;
-	private final int NEURONS_PER_HIDDEN = 5;
+	private final int HIDDEN_LAYER_COUNT = 3;
+	private final int NEURONS_PER_HIDDEN = 9;
 
 	private int maxAsteroids, asteroidSpawnChance;
 
 	//Should elitism be used in this GA. Elitism is the copying of one or a few of some of the best chromosomes in each generation.
 	private final boolean ELITISM = true;
-	private final int ELITISM_COPY_COUNT = 5;
+	private final int ELITISM_COPY_COUNT = 1;
 
 	//The chance when breeding a new chromosome that crossover will occur.
 	private final double CROSSOVER_CHANCE = 0.3;
 	//The chance when breeding a new chromosome that mutation will occur ( per allele ).
-	private final double MUTATION_CHANCE = 0.1;
+	private final double MUTATION_CHANCE = 0.4;
 
 	private GeneticIO geneticIOHandler;
+	private int generationCounter;
 
 	/**
 	 * Creates a new genetic algorithm that will run with the given parameters.
@@ -55,13 +56,13 @@ public class GA
 	 */
 	public GA(ArrayList<AbstractShip> otherShips, int populationSize, int generations, int gamesPerGeneration, int maxAsteroids, int asteroidSpawnChance) 
 	{
-		if(otherShips.size() == 0)
-			throw new InvalidParameterException("No other ships are taking part.");
 		if(populationSize < 1 || generations < 1 || gamesPerGeneration < 1)
 			throw new InvalidParameterException("Invalid parameters for GA, must have >1 for values.");
 
 		this.maxAsteroids = maxAsteroids;
 		this.asteroidSpawnChance = asteroidSpawnChance;
+		
+		generationCounter = 0;
 
 		//Generate initial population.
 		population = new ArrayList<Chromosome>();
@@ -70,7 +71,8 @@ public class GA
 		geneticIOHandler = new GeneticIO();
 		geneticIOHandler.createChromosomeFolder();
 		geneticIOHandler.writeParametersToFile(otherShips, populationSize, generations, gamesPerGeneration, maxAsteroids, asteroidSpawnChance,MUTATION_CHANCE , CROSSOVER_CHANCE);
-
+		geneticIOHandler.createFitnessFile();
+		
 		for(int i = 0 ; i < generations; i++)
 		{
 			runGeneration(otherShips,population, gamesPerGeneration);
@@ -87,13 +89,14 @@ public class GA
 	 */
 	private void runGeneration(ArrayList<AbstractShip> otherShips, ArrayList<Chromosome> population, int gamesPerGeneration) 
 	{
+		generationCounter++;
 		ArrayList<AbstractShip> batchShips = new ArrayList<AbstractShip>();
 		BatchArena arena;
 		for(Chromosome chromo : population)
 		{
 			batchShips.clear();
 			batchShips.addAll(otherShips);
-			NNShip nnShip = new NNShip(chromo);
+			NNShip nnShip = new NNShip(HIDDEN_LAYER_COUNT,NEURONS_PER_HIDDEN,chromo);
 			batchShips.add(nnShip);
 			arena = new BatchArena(batchShips, gamesPerGeneration, maxAsteroids, asteroidSpawnChance);
 			arena.startBatch();
@@ -106,9 +109,10 @@ public class GA
 			chromo.setChromosomeScore(nnShip.getScore());
 
 		}
-
+		geneticIOHandler.addToFitnessFile(generationCounter, gamesPerGeneration, population);
 		resetShipScores(batchShips);
 		saveHighestScore();
+		
 
 	}
 

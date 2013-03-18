@@ -87,7 +87,6 @@ public class Neuron
 			neuronValue += connectedWeightMap.get(n)*n.getNeuronValue();
 		}
 		
-		//Tanh activation function.
 		neuronValue = Math.tanh(neuronValue);
 
 	}

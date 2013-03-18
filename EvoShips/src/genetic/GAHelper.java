@@ -45,7 +45,7 @@ public class GAHelper
 			double chance = Math.random();
 			if(chance <= mutationChance)
 			{
-				chromoData[i] = Math.random();
+				chromoData[i] = -chromoData[i];
 			}
 		}
 	}

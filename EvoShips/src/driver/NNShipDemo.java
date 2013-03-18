@@ -10,22 +10,24 @@ import ui.ArenaFrame;
 import arena.Arena;
 import arena.objects.AbstractShip;
 import arena.objects.ships.AsteroidHunter;
+import arena.objects.ships.DerpShip;
 import arena.objects.ships.NNShip;
 
 public class NNShipDemo 
 {
-
+	private int hiddenCount = 5;
+	private int hiddenDensity = 4;
 	public NNShipDemo() 
 	{
-		AbstractShip asteroidHunter = new AsteroidHunter();
+		//AbstractShip asteroidHunter = new DerpShip();
 		
-		int numberWeights = ( ENetworkInputs.values().length * 5 ) + 
-		(5 * 5 * (5-1)) + (5 * ENetworkOutputs.values().length);
+		int numberWeights = ( ENetworkInputs.values().length * hiddenDensity ) + 
+		(hiddenCount * hiddenDensity * (hiddenCount-1)) + (hiddenDensity * ENetworkOutputs.values().length);
 
-		AbstractShip nnShip = new NNShip(new Chromosome(numberWeights));
+		AbstractShip nnShip = new NNShip(hiddenCount, hiddenDensity,new Chromosome(numberWeights));
 		Arena demoArena = new Arena(20,1,5);
 		
-		demoArena.addShipToArena(asteroidHunter);
+		//demoArena.addShipToArena(asteroidHunter);
 		demoArena.addShipToArena(nnShip);
 		
 		ArenaFrame frame = new ArenaFrame(demoArena, new Dimension(500,500));
