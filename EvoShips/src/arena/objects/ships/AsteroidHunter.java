@@ -17,7 +17,6 @@ public class AsteroidHunter extends AbstractShip
 	{
 		resetActionBooleans();
 		
-		fire = true;
 		shipWatcher = getShipsArenaWatcher();
 		
 		Asteroid nearestAst = shipWatcher.getNearestAsteroid(this);
@@ -36,6 +35,7 @@ public class AsteroidHunter extends AbstractShip
 				right = true;
 			else
 				left = true;
+			fire = true;
 			
 		}
 	}
