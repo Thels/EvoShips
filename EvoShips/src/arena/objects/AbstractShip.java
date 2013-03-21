@@ -7,7 +7,7 @@ import arena.ArenaWatcher;
 import arena.collisions.CollisionPolygon;
 import arena.objects.objects.Bullet;
 
-public abstract class AbstractShip extends AbstractObject
+public abstract class AbstractShip extends AbstractObject implements IDecisionMaker
 {
 	//Speed at which any ship can move forward every given tick.
 	private final double SHIP_SPEED = 0.002;

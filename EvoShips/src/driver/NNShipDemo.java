@@ -9,8 +9,6 @@ import neuralnetwork.ENetworkOutputs;
 import ui.ArenaFrame;
 import arena.Arena;
 import arena.objects.AbstractShip;
-import arena.objects.ships.AsteroidHunter;
-import arena.objects.ships.DerpShip;
 import arena.objects.ships.NNShip;
 
 public class NNShipDemo 

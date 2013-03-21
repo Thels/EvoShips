@@ -5,6 +5,8 @@ import genetic.GA;
 import java.util.ArrayList;
 
 import arena.objects.AbstractShip;
+import arena.objects.ships.AsteroidHunter;
+import arena.objects.ships.SmartTurret;
 
 /**
  * Class used to easily run a genetic algorithm with a list of pre-set values.
@@ -13,8 +15,8 @@ import arena.objects.AbstractShip;
  */
 public class GADriver 
 {
-	private int NUMBER_GENERATIONS = 150;
-	private int MAX_ASTEROIDS = 30;
+	private int NUMBER_GENERATIONS = 100;
+	private int MAX_ASTEROIDS = 20;
 	private int ASTEROID_SPAWN_CHANCE = 10;
 	private int POPULATION_SIZE = 100;
 	private int GAMES_PER_GENERATION = 250;
@@ -41,8 +43,8 @@ public class GADriver
 	
 	public static void main(String[] args)
 	{
-		AbstractShip other1 = null;
-		AbstractShip other2 = null;
+		AbstractShip other1 = new AsteroidHunter();
+		AbstractShip other2 = new SmartTurret();
 		AbstractShip other3 = null;
 		
 		new GADriver(other1, other2, other3);

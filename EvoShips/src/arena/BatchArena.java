@@ -19,7 +19,7 @@ import arena.objects.AbstractShip;
 public class BatchArena
 {
 
-	private final int MAX_THREADS = 4;
+	private final int MAX_THREADS = Runtime.getRuntime().availableProcessors();
 
 	private ArrayList<AbstractShip> batchShips;
 	private int gamesToRun, maxAsteroids, asteroidSpawnChance;

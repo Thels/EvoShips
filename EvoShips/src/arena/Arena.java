@@ -10,6 +10,7 @@ import arena.objects.AbstractObject;
 import arena.objects.AbstractShip;
 import arena.objects.AsteroidFactory;
 import arena.objects.EObjects;
+import arena.objects.IDecisionMaker;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -130,9 +131,9 @@ public class Arena extends Observable implements Runnable
 
 				if(obj.isObjectAlive())
 				{
-					if(obj.getObjectType() == EObjects.OBJ_SHIP)
+					if(obj instanceof IDecisionMaker)
 					{
-						((AbstractShip) obj).determineAction();
+						((IDecisionMaker) obj).determineAction();
 					}
 					if(obj.getObjectType() == EObjects.OBJ_ASTEROID)
 						currentAsteroidCount++;
@@ -172,6 +173,7 @@ public class Arena extends Observable implements Runnable
 				e.printStackTrace();
 			}
 		}
+	
 	}
 
 	/**
