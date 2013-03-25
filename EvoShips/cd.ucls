@@ -216,8 +216,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="28" corner="BOTTOM_RIGHT" language="java" name="genetic.GA" project="EvoShips" 
-    file="/EvoShips/src/genetic/GA.java" binary="false">    
+  <class id="28" corner="BOTTOM_RIGHT" language="java" name="genetic.GeneticAlgorithm" project="EvoShips" 
+    file="/EvoShips/src/genetic/GeneticAlgorithm.java" binary="false">    
     <position height="367" width="389" x="3063" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
