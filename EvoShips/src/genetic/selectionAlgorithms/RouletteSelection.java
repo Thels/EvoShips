@@ -6,9 +6,9 @@ import java.util.Random;
 import genetic.Chromosome;
 import genetic.GeneticAlgorithm;
 import genetic.GAHelper;
-import genetic.ISelectionProcess;
+import genetic.ISelectionAlgorithm;
 
-public class RouletteSection implements ISelectionProcess 
+public class RouletteSelection implements ISelectionAlgorithm 
 {
 	//Should elitism be used in this GA. Elitism is the copying of one or a few of some of the best chromosomes in each generation.
 	private final boolean ELITISM = true;

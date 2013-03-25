@@ -8,10 +8,12 @@ import arena.BatchArena;
 import arena.objects.AbstractShip;
 import arena.objects.ships.AsteroidHunter;
 import arena.objects.ships.NNShip;
+import arena.objects.ships.TheRock;
 
-public class BatchDriver {
-
-	private int maxAsteroids = 20;
+public class BatchDriver 
+{
+	
+	private int maxAsteroids = 40;
 	private int asteroidSpawnChance = 1;
 	private double[] weights = {
 			0.5902631600141028,
@@ -300,20 +302,25 @@ public class BatchDriver {
 	public BatchDriver() 
 	{
 		System.out.println("Batch started");
-		//AbstractShip ship1 = new AsteroidHunter();
+		AbstractShip ship1 = new TheRock();
 		AbstractShip nnShip = new NNShip(3, 9, new Chromosome(weights));
 		
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
-		ships.add(nnShip);
+		ships.add(ship1);
 		
-		BatchArena batch = new BatchArena(ships	, 150, maxAsteroids, asteroidSpawnChance);
+		BatchArena batch = new BatchArena(ships	, 5000, maxAsteroids, asteroidSpawnChance);
 		batch.startBatch();
 		while(batch.isBatchRunning())
 		{
 			
 		}
 		System.out.println("Batch ended");
-		System.out.println(nnShip.getScore());
+		for(AbstractShip s : ships)
+		{
+			double d = (double)s.getScore() / 5000;
+			System.out.println(s.getShipName() + " : "+d);
+		}
+			
 	}
 	
 	public static void main(String[] args)

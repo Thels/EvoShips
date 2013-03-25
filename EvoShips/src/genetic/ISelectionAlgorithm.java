@@ -2,7 +2,7 @@ package genetic;
 
 import java.util.ArrayList;
 
-public interface ISelectionProcess 
+public interface ISelectionAlgorithm 
 {
 
 	

@@ -1,6 +1,6 @@
 package genetic;
 
-import genetic.selectionAlgorithms.RouletteSection;
+import genetic.selectionAlgorithms.RouletteSelection;
 import io.GeneticIO;
 
 import java.security.InvalidParameterException;
@@ -34,7 +34,7 @@ public class GeneticAlgorithm
 
 	private GeneticIO geneticIOHandler;
 	private int generationCounter;
-	private ISelectionProcess selectionProcess;
+	private ISelectionAlgorithm selectionProcess;
 
 	/**
 	 * Creates a new genetic algorithm that will run with the given parameters.
@@ -60,7 +60,7 @@ public class GeneticAlgorithm
 		this.asteroidSpawnChance = asteroidSpawnChance;
 		
 		generationCounter = 0;
-		selectionProcess = new RouletteSection();
+		selectionProcess = new RouletteSelection();
 		//Generate initial population.
 		population = new ArrayList<Chromosome>();
 		population = generateInitialPopulation(populationSize);
