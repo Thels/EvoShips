@@ -14,9 +14,9 @@ import arena.objects.objects.Asteroid;
  * @author Ross
  *
  */
-public class AsteroidFactory 
+public class AsteroidFactory implements IObjectFactory
 {
-	static Random r = new Random();
+	private Random r = new Random();
 
 	/**
 	 * Method to create an off-screen asteroid.
@@ -28,7 +28,7 @@ public class AsteroidFactory
 	 * Asteroids are locked in at size 0.08 which means that asteroids will spawn just outside of the game world by 0.09
 	 * @return A random asteroid heading into the game.
 	 */
-	public static Asteroid createOffScreenAsteroid()
+	private Asteroid createOffScreenAsteroid()
 	{
 		double asteroidDirection = 0;
 		double xSpawnLoc, ySpawnLoc;
@@ -73,6 +73,12 @@ public class AsteroidFactory
 		}
 
 		return new Asteroid(new Point.Double(xSpawnLoc,ySpawnLoc), asteroidDirection);
+	}
+
+	@Override
+	public AbstractObject produceObject() 
+	{
+		return createOffScreenAsteroid();
 	}
 
 
