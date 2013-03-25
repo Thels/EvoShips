@@ -13,7 +13,7 @@ import arena.objects.ships.TheRock;
 public class BatchDriver 
 {
 	
-	private int maxAsteroids = 40;
+	private int maxAsteroids = 10;
 	private int asteroidSpawnChance = 1;
 	private double[] weights = {
 			0.5902631600141028,
@@ -308,7 +308,7 @@ public class BatchDriver
 		ArrayList<AbstractShip> ships = new ArrayList<AbstractShip>();
 		ships.add(ship1);
 		
-		BatchArena batch = new BatchArena(ships	, 5000, maxAsteroids, asteroidSpawnChance);
+		BatchArena batch = new BatchArena(ships	, 2000, maxAsteroids, asteroidSpawnChance);
 		batch.startBatch();
 		while(batch.isBatchRunning())
 		{
@@ -317,7 +317,7 @@ public class BatchDriver
 		System.out.println("Batch ended");
 		for(AbstractShip s : ships)
 		{
-			double d = (double)s.getScore() / 5000;
+			double d = (double)s.getScore() / 2000;
 			System.out.println(s.getShipName() + " : "+d);
 		}
 			
