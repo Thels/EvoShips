@@ -175,7 +175,7 @@ public abstract class AbstractShip extends AbstractObject implements IDecisionMa
 
 	/**
 	 * Gets the ship that this ship was copied from. This is used for when scoring has to be calculated when I changed to threading the arenas.
-	 * @return
+	 * @return If this ship has been cloned from another ship , then it returns it. If not, null.
 	 */
 	public AbstractShip getCloneOfShip()
 	{
