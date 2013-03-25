@@ -1,12 +1,11 @@
 package driver;
 
-import genetic.GA;
+import genetic.GeneticAlgorithm;
 
 import java.util.ArrayList;
 
 import arena.objects.AbstractShip;
-import arena.objects.ships.AsteroidHunter;
-import arena.objects.ships.SmartTurret;
+import arena.objects.ships.ShipTurret;
 
 /**
  * Class used to easily run a genetic algorithm with a list of pre-set values.
@@ -16,10 +15,10 @@ import arena.objects.ships.SmartTurret;
 public class GADriver 
 {
 	private int NUMBER_GENERATIONS = 100;
-	private int MAX_ASTEROIDS = 20;
-	private int ASTEROID_SPAWN_CHANCE = 10;
-	private int POPULATION_SIZE = 100;
-	private int GAMES_PER_GENERATION = 250;
+	private int MAX_ASTEROIDS = 40;
+	private int ASTEROID_SPAWN_CHANCE = 1;
+	private int POPULATION_SIZE = 150;
+	private int GAMES_PER_GENERATION = 100;
 	
 	/**
 	 * Creates a new driver that will run with a set of ships and pre-defined values.
@@ -38,13 +37,13 @@ public class GADriver
 		if(thirdShip != null)
 			otherShips.add(thirdShip);
 		
-		GA geneticAlgorithm = new GA(otherShips, POPULATION_SIZE, NUMBER_GENERATIONS, GAMES_PER_GENERATION, MAX_ASTEROIDS, ASTEROID_SPAWN_CHANCE);
+		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(otherShips, POPULATION_SIZE, NUMBER_GENERATIONS, GAMES_PER_GENERATION, MAX_ASTEROIDS, ASTEROID_SPAWN_CHANCE);
 	}
 	
 	public static void main(String[] args)
 	{
-		AbstractShip other1 = new AsteroidHunter();
-		AbstractShip other2 = new SmartTurret();
+		AbstractShip other1 = null;
+		AbstractShip other2 = null;
 		AbstractShip other3 = null;
 		
 		new GADriver(other1, other2, other3);
