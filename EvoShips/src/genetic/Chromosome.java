@@ -36,6 +36,7 @@ public class Chromosome implements ISaveableChromosome
 	public Chromosome(int numberWeights)
 	{
 		this.weights = new double[numberWeights];
+		this.chromosomeScore = 0;
 
 		Random ran = new Random();
 
@@ -49,6 +50,8 @@ public class Chromosome implements ISaveableChromosome
 			else
 				weights[i] = -val;
 		}
+		
+		ran = null;
 	}
 
 	/**
