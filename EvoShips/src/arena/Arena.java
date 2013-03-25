@@ -11,6 +11,7 @@ import arena.objects.AbstractShip;
 import arena.objects.AsteroidFactory;
 import arena.objects.EObjects;
 import arena.objects.IDecisionMaker;
+import arena.objects.IObjectFactory;
 
 /**
  * Class that will hold the shared behaviour between the various arena types. 
@@ -52,6 +53,7 @@ public class Arena extends Observable implements Runnable
 	private float asteroidSpawnChanceNorm;
 	private CollisionManager collisionManager;
 	private ArenaWatcher arenaWatcher;
+	private IObjectFactory asteroidFactory;
 
 	private boolean gameRunning;
 
@@ -72,6 +74,7 @@ public class Arena extends Observable implements Runnable
 		this.arenaObjects = new ArrayList<AbstractObject>();
 		this.arenaShips = new ArrayList<AbstractShip>();
 		this.initialShips = new ArrayList<AbstractShip>();
+		this.asteroidFactory = new AsteroidFactory();
 	}
 
 	@Override
@@ -114,8 +117,6 @@ public class Arena extends Observable implements Runnable
 
 
 
-
-
 			//In order for each tick to be fair, the list of object is shuffled here.
 			Collections.shuffle(arenaObjects);
 
@@ -149,7 +150,7 @@ public class Arena extends Observable implements Runnable
 			if(r.nextDouble() <= asteroidSpawnChanceNorm && currentAsteroidCount < maxAsteroids && ticksSinceLastAsteroidSpawn >= ASTEROID_SPAWN_DELAY)
 			{	
 				ticksSinceLastAsteroidSpawn = 0;
-				addObjectToArena(AsteroidFactory.createOffScreenAsteroid());
+				addObjectToArena(asteroidFactory.produceObject());
 			}
 			else
 				ticksSinceLastAsteroidSpawn++;
