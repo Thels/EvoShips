@@ -17,7 +17,7 @@ public class ArenaWatcher
 	private List<AbstractObject> bullets;
 
 
-	//Max value used for normalised return values.
+	//Max arena distance value used for normalised return values.
 	private final double arenaMaxSize = Math.sqrt(2);
 
 	/**
